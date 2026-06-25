@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/flanovax-design-system-f21bfd70-f463-47e5-b142-aa1d8ce82c86/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/flanovax-design-system-f21bfd70-f463-47e5-b142-aa1d8ce82c86/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/flanovax-design-system-f21bfd70-f463-47e5-b142-aa1d8ce82c86/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/flanovax-design-system-f21bfd70-f463-47e5-b142-aa1d8ce82c86/styles.css">
+  <script src="_ds/flanovax-design-system-f21bfd70-f463-47e5-b142-aa1d8ce82c86/_ds_bundle.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #FAFAF8; color: #1C1814; font-family: 'Hanken Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes waPulse {
+      0%,100% { box-shadow: 0 4px 24px rgba(34,197,94,.45), 0 0 0 0 rgba(34,197,94,.4); }
+      55%     { box-shadow: 0 4px 24px rgba(34,197,94,.45), 0 0 0 18px rgba(34,197,94,0); }
+    }
+
+    .a1 { animation: fadeUp .8s .1s cubic-bezier(0.2,0.7,0.2,1) both; }
+    .a2 { animation: fadeUp .8s .28s cubic-bezier(0.2,0.7,0.2,1) both; }
+    .a3 { animation: fadeUp .8s .46s cubic-bezier(0.2,0.7,0.2,1) both; }
+    .a4 { animation: fadeUp .8s .62s cubic-bezier(0.2,0.7,0.2,1) both; }
+    .wa-pulse { animation: waPulse 2.8s infinite; }
+
+    .barber-input {
+      width: 100%;
+      background: rgba(0,0,0,.04);
+      border: 1.5px solid rgba(0,0,0,.1);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: #1C1814;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color .2s, background .2s;
+      appearance: none;
+      -webkit-appearance: none;
+      color-scheme: light;
+    }
+    .barber-input::placeholder { color: rgba(28,24,20,.35); }
+    .barber-input:focus { border-color: #2563EB; background: rgba(37,99,235,.05); }
+    select.barber-input option { background: #fff; color: #1C1814; }
+    textarea.barber-input { resize: vertical; min-height: 90px; }
+    button:disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
+
+    .prod-card { transition: box-shadow .25s, transform .22s; }
+    .prod-card:hover { box-shadow: 0 16px 48px rgba(28,24,20,.1); transform: translateY(-4px); }
+    .svc-card { transition: background .22s; }
+    .svc-card:hover { background: #FFFBF3 !important; }
+
+    /* ── SERVICE CARDS NEW ── */
+    .sc {
+      position: relative; overflow: hidden; border-radius: 20px;
+      border: 1.5px solid rgba(37,99,235,.11);
+      transition: transform .32s cubic-bezier(0.2,0.8,0.2,1), box-shadow .32s, border-color .25s;
+    }
+    .sc:hover { transform: translateY(-7px); box-shadow: 0 28px 64px rgba(28,24,20,.13); border-color: rgba(37,99,235,.3); }
+    .sc-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+      background: rgba(13,11,8,.92); backdrop-filter: blur(4px);
+      opacity: 0; transform: translateY(14px);
+      transition: opacity .26s ease, transform .26s ease;
+      text-align: center; padding: 32px; pointer-events: none;
+    }
+    .sc:hover .sc-overlay { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .sc-pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-family: 'Space Mono', monospace; font-size: .58rem;
+      letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+      padding: 5px 12px; border-radius: 100px; white-space: nowrap;
+    }
+    @keyframes svcIn {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .svc-grid .sc:nth-child(1) { animation: svcIn .55s .04s both; }
+    .svc-grid .sc:nth-child(2) { animation: svcIn .55s .13s both; }
+    .svc-grid .sc:nth-child(3) { animation: svcIn .55s .22s both; }
+    .svc-grid .sc:nth-child(4) { animation: svcIn .55s .31s both; }
+    .svc-grid .sc:nth-child(5) { animation: svcIn .55s .40s both; }
+    .svc-grid .sc:nth-child(6) { animation: svcIn .55s .49s both; }
+    .svc-grid .sc:nth-child(7) { animation: svcIn .55s .58s both; }
+    @media (max-width: 880px) {
+      .svc-grid { grid-template-columns: 1fr 1fr !important; }
+      .svc-feat { flex-direction: column !important; min-height: unset !important; }
+      .svc-feat-icon { width: 100% !important; height: 160px !important; }
+      .svc-wide { grid-column: span 2 !important; flex-direction: column !important; min-height: unset !important; }
+      .svc-wide-icon { width: 100% !important; height: 100px !important; border-right: none !important; border-bottom: 1px solid rgba(37,99,235,.1) !important; }
+    }
+    @media (max-width: 600px) {
+      .svc-grid { grid-template-columns: 1fr !important; }
+      .svc-grid .sc { grid-column: span 1 !important; }
+      .svc-wide { flex-direction: column !important; }
+    }
+
+    @media (max-width: 880px) {
+      .nav-links-d { display: none !important; }
+      .grid-3 { grid-template-columns: 1fr 1fr !important; }
+      .grid-gal { grid-template-columns: 1fr !important; }
+      .grid-ft { grid-template-columns: 1fr 1fr !important; }
+      .stats-sep { display: none !important; }
+    }
+    @media (max-width: 600px) {
+      .grid-3 { grid-template-columns: 1fr !important; }
+      .grid-ft { grid-template-columns: 1fr !important; }
+      .form-row { flex-direction: column !important; }
+      .hero-ctas { flex-direction: column !important; align-items: stretch !important; }
+      .hero-ctas a { justify-content: center; }
+    }
+
+    /* ── NAV EFFECTS ── */
+    @keyframes navIn {
+      from { opacity: 0; transform: translateY(-100%); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .nav-anim { animation: navIn .55s .05s cubic-bezier(0.2,0.8,0.2,1) both; }
+
+    .nav-link {
+      position: relative; color: rgba(28,24,20,.58);
+      text-decoration: none; font-weight: 500; font-size: .9375rem;
+      padding: 6px 12px 6px; border-radius: 8px;
+      transition: color .22s, background .22s;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: 0; left: 12px;
+      width: 0; height: 2px; background: #2563EB;
+      border-radius: 2px; transition: width .28s cubic-bezier(0.4,0,0.2,1);
+    }
+    .nav-link:hover { color: #2563EB; background: rgba(37,99,235,.07); }
+    .nav-link:hover::after { width: calc(100% - 24px); }
+    .nav-link.active {
+      color: #2563EB; background: rgba(37,99,235,.09); font-weight: 600;
+    }
+    .nav-link.active::after { width: calc(100% - 24px); }
+
+    .nav-cta {
+      position: relative; overflow: hidden;
+      background: #2563EB; color: #fff; padding: 11px 26px;
+      border-radius: 100px; font-weight: 700; font-size: .875rem;
+      text-decoration: none; display: inline-flex; align-items: center;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 18px rgba(37,99,235,.3);
+    }
+    .nav-cta::before {
+      content: ''; position: absolute; top: 0; left: -80%;
+      width: 55%; height: 100%;
+      background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.32) 50%, transparent 100%);
+      transform: skewX(-18deg); pointer-events: none;
+      transition: left .55s ease;
+    }
+    .nav-cta:hover { background: #1A56D6; transform: translateY(-1px); box-shadow: 0 7px 24px rgba(37,99,235,.4); }
+    .nav-cta:hover::before { left: 130%; }
+
+    @keyframes ringRotate {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .logo-outer {
+      position: relative; width: 50px; height: 50px; flex-shrink: 0;
+    }
+    .logo-outer::before {
+      content: '';
+      position: absolute; inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(#2563EB 0%, #60A5FA 30%, transparent 50%, #2563EB 100%);
+      animation: ringRotate 3.5s linear infinite;
+      opacity: .7;
+    }
+    .logo-outer::after {
+      content: '';
+      position: absolute; inset: -1px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.97);
+    }
+    .logo-ring-wrap {
+      position: relative; z-index: 1;
+      width: 46px; height: 46px; border-radius: 50%; overflow: hidden;
+      border: 2px solid rgba(37,99,235,.35);
+      transition: box-shadow .35s;
+    }
+    .logo-outer:hover .logo-ring-wrap {
+      box-shadow: 0 0 0 2px rgba(37,99,235,.3), 0 4px 16px rgba(37,99,235,.28);
+    }
+
+    .hbg {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      width: 40px; height: 40px; cursor: pointer; border: none; background: none;
+      padding: 8px; border-radius: 8px; transition: background .2s; flex-shrink: 0;
+    }
+    .hbg:hover { background: rgba(28,24,20,.07); }
+    .hbg span {
+      display: block; width: 22px; height: 2px; background: #1C1814;
+      border-radius: 2px; transform-origin: center;
+      transition: transform .28s cubic-bezier(0.4,0,0.2,1), opacity .2s;
+    }
+    .mob-menu {
+      border-top: 1px solid rgba(37,99,235,.12);
+      background: rgba(255,255,255,.98);
+      padding: 12px 24px 24px;
+      display: flex; flex-direction: column;
+    }
+    .mob-menu a {
+      color: rgba(28,24,20,.72); text-decoration: none; font-weight: 500;
+      font-size: 1.0625rem; padding: 13px 0;
+      border-bottom: 1px solid rgba(0,0,0,.05);
+      transition: color .2s;
+    }
+    .mob-menu a:hover { color: #2563EB; }
+    .mob-menu a:last-child { border-bottom: none; }
+    @media (max-width: 880px) { .hbg { display: flex !important; } }
+  </style>
+</helmet>
+
+<!-- FLOATING WHATSAPP -->
+<a href="{{ waLink }}" target="_blank" rel="noopener" class="wa-pulse"
+   title="Consultar por WhatsApp"
+   style="position:fixed;bottom:28px;right:28px;z-index:999;width:62px;height:62px;border-radius:50%;background:#22C55E;display:flex;align-items:center;justify-content:center;text-decoration:none;">
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path fill="white" d="M16 2.5C8.82 2.5 3 8.32 3 15.5c0 2.3.61 4.47 1.67 6.35L3 29l7.42-1.62A13.4 13.4 0 0016 28.5c7.18 0 13-5.82 13-13S23.18 2.5 16 2.5zm6.1 18.28c-.3-.15-1.79-.88-2.07-.98-.27-.1-.47-.15-.67.15-.2.3-.78.98-.96 1.18-.18.2-.36.22-.66.08-.3-.15-1.26-.47-2.4-1.49-.89-.8-1.49-1.78-1.66-2.08-.18-.3-.02-.46.13-.62.14-.14.3-.36.45-.54.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.63-.92-2.23-.24-.58-.49-.5-.67-.51-.18-.01-.38-.01-.58-.01-.2 0-.52.07-.8.38-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.12-.27-.2-.57-.34z"/></svg>
+</a>
+
+<!-- SCROLL PROGRESS -->
+<div style="{{ progressStyle }}"></div>
+
+<!-- NAV -->
+<nav class="nav-anim" style="{{ navStyle }}">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:80px;">
+
+    <a href="#" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;">
+      <div class="logo-outer">
+        <div class="logo-ring-wrap">
+          <img src="uploads/pasted-1782089821708-0.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.1rem;color:#1C1814;letter-spacing:-.015em;line-height:1.1;">ÁRABE'S</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.16em;color:#2563EB;text-transform:uppercase;margin-top:2px;">Barber Studio</div>
+      </div>
+    </a>
+
+    <div class="nav-links-d" style="display:flex;align-items:center;gap:4px;">
+      <a href="#servicios" class="nav-link {{ activeClass.servicios }}">Servicios</a>
+      <a href="#productos"  class="nav-link {{ activeClass.productos }}">Productos</a>
+      <a href="#galeria"   class="nav-link {{ activeClass.galeria }}">Galería</a>
+      <a href="#reservar"  class="nav-link {{ activeClass.reservar }}">Reservas</a>
+      <div style="width:1px;height:18px;background:rgba(37,99,235,.25);margin:0 10px;flex-shrink:0;"></div>
+      <a href="#reservar" class="nav-cta">Reservar →</a>
+    </div>
+
+    <button class="hbg" onClick="{{ toggleMenu }}" aria-label="Menú">
+      <span style="{{ hbg1 }}"></span>
+      <span style="{{ hbg2 }}"></span>
+      <span style="{{ hbg3 }}"></span>
+    </button>
+  </div>
+
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="mob-menu">
+      <a href="#servicios" onClick="{{ closeMenu }}">Servicios</a>
+      <a href="#productos"  onClick="{{ closeMenu }}">Productos</a>
+      <a href="#galeria"   onClick="{{ closeMenu }}">Galería</a>
+      <a href="#reservar"  onClick="{{ closeMenu }}">Reservas</a>
+      <a href="#reservar"  onClick="{{ closeMenu }}" class="nav-cta" style="margin-top:16px;justify-content:center;">Reservar cita →</a>
+    </div>
+  </sc-if>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:url('uploads/pasted-1782089731388-0.png');background-size:cover;background-position:center top;"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(13,11,8,.8) 0%,rgba(13,11,8,.5) 50%,rgba(13,11,8,.9) 100%);"></div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(37,99,235,.6),transparent);"></div>
+  <div style="position:relative;z-index:1;text-align:center;padding:100px 24px 80px;max-width:960px;width:100%;">
+    <p class="a1" style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.18em;color:#2563EB;text-transform:uppercase;margin-bottom:22px;">Barber Studio Premium · Lima, Perú</p>
+    <h1 class="a2" style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2.8rem,8vw,5.75rem);font-weight:800;letter-spacing:-.035em;line-height:1.02;color:#F5F1E8;text-wrap:balance;margin-bottom:24px;">
+      El arte del<br/><span style="color:#2563EB;">corte perfecto.</span>
+    </h1>
+    <p class="a3" style="font-size:clamp(1rem,2.2vw,1.2rem);color:rgba(245,241,232,.7);max-width:520px;margin:0 auto 44px;line-height:1.7;">
+      Cortes, fades y diseños de barba con maestría. Tu imagen, nuestra pasión.
+    </p>
+    <div class="hero-ctas a4" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="#reservar" style="background:#2563EB;color:#0D0B08;padding:16px 38px;border-radius:100px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s;box-shadow:0 8px 32px rgba(37,99,235,.32);" style-hover="background:#1A56D6;transform:translateY(-2px);">
+        Reservar cita →
+      </a>
+      <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:rgba(255,255,255,.1);color:#F5F1E8;border:1.5px solid rgba(245,241,232,.3);padding:15px 32px;border-radius:100px;font-weight:600;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:border-color .2s,color .2s;" style-hover="border-color:#2563EB;color:#2563EB;">
+        <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2.5C8.82 2.5 3 8.32 3 15.5c0 2.3.61 4.47 1.67 6.35L3 29l7.42-1.62A13.4 13.4 0 0016 28.5c7.18 0 13-5.82 13-13S23.18 2.5 16 2.5zm6.1 18.28c-.3-.15-1.79-.88-2.07-.98-.27-.1-.47-.15-.67.15-.2.3-.78.98-.96 1.18-.18.2-.36.22-.66.08-.3-.15-1.26-.47-2.4-1.49-.89-.8-1.49-1.78-1.66-2.08-.18-.3-.02-.46.13-.62.14-.14.3-.36.45-.54.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.63-.92-2.23-.24-.58-.49-.5-.67-.51-.18-.01-.38-.01-.58-.01-.2 0-.52.07-.8.38-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.12-.27-.2-.57-.34z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:38px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:.4;">
+    <div style="width:1px;height:44px;background:linear-gradient(to bottom,#2563EB,transparent);"></div>
+    <span style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#F5F1E8;">Scroll</span>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section style="background:#FFFFFF;border-bottom:1px solid rgba(0,0,0,.06);">
+  <div style="max-width:1100px;margin:0 auto;padding:36px 32px;">
+    <div style="display:flex;justify-content:center;align-items:center;gap:48px;flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;font-weight:800;color:#2563EB;letter-spacing:-.025em;line-height:1;">500+</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-top:6px;">Clientes atendidos</div>
+      </div>
+      <div class="stats-sep" style="width:1px;height:40px;background:rgba(37,99,235,.2);"></div>
+      <div style="text-align:center;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;font-weight:800;color:#2563EB;letter-spacing:-.025em;line-height:1;">5</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-top:6px;">Barberos expertos</div>
+      </div>
+      <div class="stats-sep" style="width:1px;height:40px;background:rgba(37,99,235,.2);"></div>
+      <div style="text-align:center;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;font-weight:800;color:#2563EB;letter-spacing:-.025em;line-height:1;">7</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-top:6px;">Días a la semana</div>
+      </div>
+      <div class="stats-sep" style="width:1px;height:40px;background:rgba(37,99,235,.2);"></div>
+      <div style="text-align:center;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;font-weight:800;color:#2563EB;letter-spacing:-.025em;line-height:1;">3+</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-top:6px;">Años de experiencia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="servicios" style="padding:96px 32px 80px;background:#F5F1E8;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <!-- Header -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:52px;">
+      <div>
+        <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.16em;color:#2563EB;text-transform:uppercase;margin-bottom:14px;">NUESTROS SERVICIOS</p>
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2rem,4.5vw,3.25rem);font-weight:800;letter-spacing:-.03em;color:#1C1814;text-wrap:balance;line-height:1.05;">Cada corte,<br/>una obra maestra.</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
+        <p style="font-size:.9375rem;color:rgba(28,24,20,.5);line-height:1.65;text-align:right;max-width:280px;">Barberos certificados. Resultados que hablan solos.</p>
+        <a href="#reservar" style="background:#1C1814;color:#F5F1E8;padding:12px 26px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s;" style-hover="background:#2563EB;transform:translateY(-1px);">Reservar ahora →</a>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="svc-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+
+      <!-- FEATURED: Corte + Barba (span 2) -->
+      <div class="sc svc-feat" style="grid-column:span 2;background:#1C1814;display:flex;min-height:270px;">
+        <div class="svc-feat-icon" style="width:190px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-right:1px solid rgba(37,99,235,.1);">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(37,99,235,.28) 0%,transparent 68%);"></div>
+          <svg width="90" height="90" viewBox="0 0 90 90" fill="none" stroke="#2563EB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="position:relative;z-index:1;filter:drop-shadow(0 0 12px rgba(37,99,235,.35));">
+            <circle cx="22" cy="28" r="8"/><circle cx="22" cy="56" r="8"/>
+            <line x1="27.5" y1="32" x2="68" y2="42"/><line x1="27.5" y1="52" x2="68" y2="42"/>
+            <rect x="58" y="31" width="22" height="22" rx="3.5"/>
+            <line x1="58" y1="42" x2="80" y2="42"/>
+            <line x1="63" y1="35" x2="63" y2="28"/>
+          </svg>
+        </div>
+        <div style="flex:1;padding:30px 28px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+              <span class="sc-pill" style="background:#2563EB;color:#fff;">★ Más pedido</span>
+              <span class="sc-pill" style="background:rgba(37,99,235,.12);color:#2563EB;border:1px solid rgba(37,99,235,.22);">COMBO</span>
+              <span class="sc-pill" style="background:rgba(245,241,232,.06);color:rgba(245,241,232,.42);">⏱ 45 min</span>
+            </div>
+            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.875rem;font-weight:800;color:#F5F1E8;letter-spacing:-.025em;margin-bottom:10px;line-height:1.05;">Corte + Barba</h3>
+            <p style="font-size:.9375rem;color:rgba(245,241,232,.5);line-height:1.65;max-width:320px;">Combo premium: corte personalizado más diseño y perfilado de barba con navaja. Acabado perfecto.</p>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:20px;">
+            <div>
+              <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,232,.25);margin-bottom:3px;">Precio</div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;font-weight:800;color:#2563EB;letter-spacing:-.03em;line-height:1;">S/. 35</div>
+            </div>
+            <a href="#reservar" style="background:#2563EB;color:#0D0B08;padding:13px 28px;border-radius:100px;font-weight:700;font-size:.9375rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s;box-shadow:0 6px 22px rgba(37,99,235,.28);" style-hover="background:#93C5FD;transform:translateY(-1px);">Reservar →</a>
+          </div>
+        </div>
+        <div class="sc-overlay">
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.2rem;font-weight:700;color:#F5F1E8;">¡El favorito de todos!</p>
+          <p style="font-size:.875rem;color:rgba(245,241,232,.55);line-height:1.55;">Corte + diseño de barba completo con acabado premium.</p>
+          <a href="#reservar" style="background:#2563EB;color:#0D0B08;padding:12px 28px;border-radius:100px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:7px;">Agendar cita →</a>
+        </div>
+      </div>
+
+      <!-- Corte Clásico -->
+      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
+        <div style="height:138px;background:linear-gradient(145deg,#1C1814 0%,#2D2820 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 60% 40%,rgba(37,99,235,.2) 0%,transparent 65%);"></div>
+          <svg width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px rgba(37,99,235,.3));">
+            <circle cx="16" cy="18" r="7"/><circle cx="16" cy="40" r="7"/>
+            <line x1="21.5" y1="21.5" x2="48" y2="29"/><line x1="21.5" y1="36.5" x2="48" y2="29"/>
+          </svg>
+        </div>
+        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 30 min</span>
+            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Corte Clásico</h3>
+            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Tijera y máquina con acabado prolijo y natural. El esencial de siempre.</p>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:18px;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.7rem;font-weight:800;color:#2563EB;letter-spacing:-.025em;">S/. 20</div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#2563EB;opacity:.4;"></div>
+          </div>
+        </div>
+        <div class="sc-overlay">
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Corte Clásico</p>
+          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Tijera y máquina profesional.<br/>30 minutos · S/. 20</p>
+          <a href="#reservar" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Reservar →</a>
+        </div>
+      </div>
+
+      <!-- Fade/Degradado -->
+      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
+        <div style="height:138px;background:linear-gradient(145deg,#2563EB 0%,#1A56D6 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
+          <svg width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.5" stroke-linecap="round">
+            <rect x="10" y="12" width="38" height="34" rx="5"/>
+            <line x1="10" y1="22" x2="48" y2="22" stroke-opacity=".85"/>
+            <line x1="10" y1="30" x2="48" y2="30" stroke-opacity=".55"/>
+            <line x1="10" y1="38" x2="48" y2="38" stroke-opacity=".28"/>
+          </svg>
+          <span class="sc-pill" style="position:absolute;top:10px;right:10px;background:rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(4px);font-size:.52rem;">POPULAR</span>
+        </div>
+        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 35 min</span>
+            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Fade / Degradado</h3>
+            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Degradado suave y preciso. Líneas limpias y terminados de alto nivel.</p>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:18px;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.7rem;font-weight:800;color:#2563EB;letter-spacing:-.025em;">S/. 25</div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#2563EB;opacity:.4;"></div>
+          </div>
+        </div>
+        <div class="sc-overlay">
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Fade / Degradado</p>
+          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Degradado preciso y limpio.<br/>35 minutos · S/. 25</p>
+          <a href="#reservar" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Reservar →</a>
+        </div>
+      </div>
+
+      <!-- Diseño de Barba -->
+      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
+        <div style="height:138px;background:linear-gradient(145deg,#1C1814 0%,#2D2820 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 38% 62%,rgba(37,99,235,.22) 0%,transparent 65%);"></div>
+          <svg width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px rgba(37,99,235,.3));">
+            <rect x="22" y="10" width="12" height="30" rx="3.5"/>
+            <line x1="22" y1="36" x2="12" y2="50"/><line x1="34" y1="36" x2="44" y2="50"/>
+            <line x1="16" y1="44" x2="20" y2="40"/>
+          </svg>
+        </div>
+        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 25 min</span>
+            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Diseño de Barba</h3>
+            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Perfilado con navaja. Definición total con acabado impecable.</p>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:18px;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.7rem;font-weight:800;color:#2563EB;letter-spacing:-.025em;">S/. 20</div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#2563EB;opacity:.4;"></div>
+          </div>
+        </div>
+        <div class="sc-overlay">
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Diseño de Barba</p>
+          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Navaja + perfilado profesional.<br/>25 minutos · S/. 20</p>
+          <a href="#reservar" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Reservar →</a>
+        </div>
+      </div>
+
+      <!-- Coloración -->
+      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
+        <div style="height:138px;background:linear-gradient(145deg,#1A56D6 0%,#2563EB 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
+          <svg width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="29" cy="29" r="11"/>
+            <circle cx="29" cy="13" r="5.5"/>
+            <circle cx="42" cy="37" r="5.5"/>
+            <circle cx="16" cy="37" r="5.5"/>
+          </svg>
+          <span class="sc-pill" style="position:absolute;top:10px;right:10px;background:rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(4px);font-size:.52rem;">ESPECIAL</span>
+        </div>
+        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 60 min</span>
+            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Coloración</h3>
+            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Coloración y decoloración profesional. El tono que siempre quisiste.</p>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:18px;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.7rem;font-weight:800;color:#2563EB;letter-spacing:-.025em;">S/. 50</div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#2563EB;opacity:.4;"></div>
+          </div>
+        </div>
+        <div class="sc-overlay">
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Coloración</p>
+          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Tintes y decoloración profesional.<br/>60 minutos · S/. 50</p>
+          <a href="#reservar" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Reservar →</a>
+        </div>
+      </div>
+
+      <!-- Tratamiento Capilar (span 3 = full width) -->
+      <div class="sc svc-wide" style="grid-column:span 3;background:#1C1814;display:flex;align-items:center;min-height:150px;">
+        <div class="svc-wide-icon" style="width:130px;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:28px;border-right:1px solid rgba(37,99,235,.1);">
+          <svg width="62" height="62" viewBox="0 0 62 62" fill="none" stroke="#2563EB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px rgba(37,99,235,.35));">
+            <path d="M31 9 C31 9 16 24 16 34 a15 15 0 0030 0 C46 24 31 9 31 9Z"/>
+            <path d="M23 41 a8 8 0 008 0"/>
+            <line x1="31" y1="9" x2="31" y2="4"/>
+          </svg>
+        </div>
+        <div style="flex:1;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+          <div>
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap;">
+              <span class="sc-pill" style="background:rgba(37,99,235,.12);color:#2563EB;border:1px solid rgba(37,99,235,.2);">NUTRICIÓN PROFUNDA</span>
+              <span class="sc-pill" style="background:rgba(245,241,232,.06);color:rgba(245,241,232,.4);">⏱ 50 min</span>
+            </div>
+            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:#F5F1E8;letter-spacing:-.02em;margin-bottom:6px;">Tratamiento Capilar</h3>
+            <p style="font-size:.9375rem;color:rgba(245,241,232,.45);line-height:1.6;max-width:440px;">Hidratación y nutrición profunda para un cabello sano, fuerte y brillante. Productos premium incluidos.</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:22px;flex-shrink:0;">
+            <div style="text-align:right;">
+              <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,232,.24);margin-bottom:3px;">Desde</div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2.1rem;font-weight:800;color:#2563EB;letter-spacing:-.025em;line-height:1;">S/. 40</div>
+            </div>
+            <a href="#reservar" style="background:#2563EB;color:#0D0B08;padding:13px 26px;border-radius:100px;font-weight:700;font-size:.9375rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;transition:background .2s,transform .15s;box-shadow:0 4px 20px rgba(37,99,235,.25);" style-hover="background:#93C5FD;transform:translateY(-1px);">Reservar →</a>
+          </div>
+        </div>
+        <div class="sc-overlay">
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Tratamiento Capilar</p>
+          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Hidratación y nutrición profunda.<br/>50 minutos · S/. 40</p>
+          <a href="#reservar" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Reservar →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<section id="galeria" style="padding:96px 32px;background:#FFFFFF;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="margin-bottom:52px;">
+      <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.16em;color:#2563EB;text-transform:uppercase;margin-bottom:14px;">NUESTRO ESTUDIO</p>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:800;letter-spacing:-.025em;color:#1C1814;text-wrap:balance;">Trabajo que habla<br/>por sí solo.</h2>
+    </div>
+    <div class="grid-gal" style="display:grid;grid-template-columns:1.35fr 1fr;gap:16px;align-items:start;">
+      <img src="uploads/pasted-1782089731388-0.png" alt="Equipo Árabe's Barber Studio"
+           style="width:100%;height:480px;object-fit:cover;border-radius:18px;display:block;" />
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <img src="uploads/pasted-1782089737424-0.png" alt="Barbero trabajando"
+             style="width:100%;height:280px;object-fit:cover;object-position:center 20%;border-radius:18px;display:block;" />
+        <div style="background:linear-gradient(135deg,#2563EB 0%,#1A56D6 100%);border-radius:18px;padding:30px 28px;display:flex;flex-direction:column;justify-content:space-between;min-height:164px;">
+          <span style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.14em;color:rgba(255,255,255,.55);text-transform:uppercase;">Reserva tu lugar</span>
+          <div>
+            <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.375rem;font-weight:800;color:#fff;margin-bottom:16px;line-height:1.2;">Tu próxima cita te espera.</p>
+            <a href="#reservar"
+               style="background:#fff;color:#2563EB;padding:11px 22px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:opacity .2s;"
+               style-hover="opacity:.85;">
+              Reservar →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRODUCTS ═══ -->
+<section id="productos" style="padding:96px 32px;background:#F5F1E8;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="margin-bottom:52px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+      <div>
+        <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.16em;color:#2563EB;text-transform:uppercase;margin-bottom:14px;">TIENDA</p>
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:800;letter-spacing:-.025em;color:#1C1814;text-wrap:balance;">Productos para el cuidado<br/>en casa.</h2>
+      </div>
+      <p style="font-size:1rem;color:rgba(28,24,20,.55);max-width:340px;line-height:1.7;">Llévate los mejores productos de barbería profesional y mantén tu look perfecto.</p>
+    </div>
+
+    <div class="grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+
+      <!-- Pomada -->
+      <div class="prod-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
+        <div style="height:148px;background:linear-gradient(135deg,#1C1814 0%,#3A352A 100%);display:flex;align-items:center;justify-content:center;">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(37,99,235,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="12" y="24" width="28" height="18" rx="3"/>
+            <path d="M12 31h28"/>
+            <path d="M15 24v-4.5A2.5 2.5 0 0117.5 17H34.5A2.5 2.5 0 0137 19.5V24"/>
+            <path d="M22 17v-4M30 17v-4"/>
+          </svg>
+        </div>
+        <div style="padding:22px 22px 24px;">
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:8px;">FIJACIÓN FUERTE</div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#1C1814;margin-bottom:8px;">Pomada de Cera</h4>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Fijación máxima con acabado natural. Ideal para estilos clásicos y modernos.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;color:#2563EB;">S/. 25</span>
+            <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#2563EB;color:#fff;padding:9px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;" style-hover="background:#1A56D6;">Consultar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aceite Barba -->
+      <div class="prod-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
+        <div style="height:148px;background:linear-gradient(135deg,#2563EB 0%,#1A56D6 100%);display:flex;align-items:center;justify-content:center;">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M26 10 C26 10 14 22 14 30 a12 12 0 0024 0 C38 22 26 10 26 10Z"/>
+            <path d="M20 34 a6 6 0 006 0"/>
+          </svg>
+        </div>
+        <div style="padding:22px 22px 24px;">
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:8px;">HIDRATACIÓN</div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#1C1814;margin-bottom:8px;">Aceite para Barba</h4>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Hidrata y suaviza la barba. Aroma fresco y absorción rápida.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;color:#2563EB;">S/. 30</span>
+            <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#2563EB;color:#fff;padding:9px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;" style-hover="background:#1A56D6;">Consultar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shampoo -->
+      <div class="prod-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
+        <div style="height:148px;background:linear-gradient(135deg,#1C1814 0%,#3A352A 100%);display:flex;align-items:center;justify-content:center;">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(37,99,235,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="16" y="16" width="20" height="26" rx="3.5"/>
+            <path d="M20 16v-5h12v5"/>
+            <path d="M36 24h4v7h-4"/>
+            <path d="M22 28h8"/>
+          </svg>
+        </div>
+        <div style="padding:22px 22px 24px;">
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:8px;">LIMPIEZA</div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#1C1814;margin-bottom:8px;">Shampoo Especial</h4>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Limpieza profunda para cabello y barba. Sin sulfatos agresivos.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;color:#2563EB;">S/. 22</span>
+            <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#2563EB;color:#fff;padding:9px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;" style-hover="background:#1A56D6;">Consultar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spray -->
+      <div class="prod-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
+        <div style="height:148px;background:linear-gradient(135deg,#2563EB 0%,#1A56D6 100%);display:flex;align-items:center;justify-content:center;">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="12" y="20" width="18" height="22" rx="3"/>
+            <path d="M30 26h6v-6h-8v6"/>
+            <path d="M36 20v-5"/>
+            <path d="M38 13l3-3M40 15h4M42 13l-3-3"/>
+          </svg>
+        </div>
+        <div style="padding:22px 22px 24px;">
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:8px;">TEXTURA</div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#1C1814;margin-bottom:8px;">Spray de Sal Marina</h4>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Textura y volumen natural. Perfecto para estilos desenfadados y casuales.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;color:#2563EB;">S/. 22</span>
+            <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#2563EB;color:#fff;padding:9px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;" style-hover="background:#1A56D6;">Consultar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cera mate -->
+      <div class="prod-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
+        <div style="height:148px;background:linear-gradient(135deg,#1C1814 0%,#3A352A 100%);display:flex;align-items:center;justify-content:center;">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(37,99,235,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="26" cy="20" rx="14" ry="5"/>
+            <path d="M12 20v10" /><path d="M40 20v10"/>
+            <ellipse cx="26" cy="30" rx="14" ry="5"/>
+            <path d="M20 26h12"/>
+          </svg>
+        </div>
+        <div style="padding:22px 22px 24px;">
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:8px;">ACABADO MATE</div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#1C1814;margin-bottom:8px;">Cera Mate</h4>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Control y definición sin brillo. Look natural de alto nivel todo el día.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;color:#2563EB;">S/. 28</span>
+            <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#2563EB;color:#fff;padding:9px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;" style-hover="background:#1A56D6;">Consultar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acondicionador -->
+      <div class="prod-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
+        <div style="height:148px;background:linear-gradient(135deg,#2563EB 0%,#1A56D6 100%);display:flex;align-items:center;justify-content:center;">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 12h12v26l-2 4h-8l-2-4V12z"/>
+            <path d="M20 12v-3a2 2 0 012-2h8a2 2 0 012 2v3"/>
+            <path d="M22 24h8"/>
+            <path d="M23 30h6"/>
+          </svg>
+        </div>
+        <div style="padding:22px 22px 24px;">
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:8px;">NUTRICIÓN</div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#1C1814;margin-bottom:8px;">Acondicionador Capilar</h4>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Nutrición y suavidad extrema. Para un cabello manejable y con brillo.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;color:#2563EB;">S/. 18</span>
+            <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#2563EB;color:#fff;padding:9px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;" style-hover="background:#1A56D6;">Consultar</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="text-align:center;margin-top:36px;font-size:.9rem;color:rgba(28,24,20,.45);font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.08em;">TODOS LOS PRODUCTOS DISPONIBLES EN TIENDA · CONSULTA DISPONIBILIDAD POR WHATSAPP</p>
+  </div>
+</section>
+
+<!-- ═══ BOOKING FORM ═══ -->
+<section id="reservar" style="padding:96px 32px;background:#FFFFFF;">
+  <div style="max-width:700px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.16em;color:#2563EB;text-transform:uppercase;margin-bottom:14px;">AGENDAR CITA</p>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:800;letter-spacing:-.025em;color:#1C1814;margin-bottom:14px;">Reserva tu cita.</h2>
+      <p style="font-size:1rem;color:rgba(28,24,20,.55);line-height:1.7;">Completa el formulario y te contactamos para confirmar.<br/>O escríbenos directo por WhatsApp.</p>
+    </div>
+
+    <div style="background:#FAFAF8;border:1.5px solid rgba(37,99,235,.15);border-radius:24px;padding:48px 40px;box-shadow:0 4px 32px rgba(28,24,20,.06);">
+
+      <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ handleSubmit }}" style="display:flex;flex-direction:column;gap:22px;">
+
+          <div class="form-row" style="display:flex;gap:18px;">
+            <div style="flex:1;min-width:0;">
+              <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Nombre completo *</label>
+              <input type="text" class="barber-input" placeholder="Tu nombre" value="{{ nombre }}" onChange="{{ setNombre }}" />
+            </div>
+            <div style="flex:1;min-width:0;">
+              <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">WhatsApp / Teléfono *</label>
+              <input type="tel" class="barber-input" placeholder="+51 xxx xxx xxx" value="{{ telefono }}" onChange="{{ setTelefono }}" />
+            </div>
+          </div>
+
+          <div>
+            <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Servicio *</label>
+            <select class="barber-input" value="{{ servicio }}" onChange="{{ setServicio }}">
+              <option value="">Selecciona un servicio…</option>
+              <option value="Corte Clásico — S/. 20">Corte Clásico — S/. 20</option>
+              <option value="Fade / Degradado — S/. 25">Fade / Degradado — S/. 25</option>
+              <option value="Corte + Barba — S/. 35">Corte + Barba — S/. 35</option>
+              <option value="Diseño de Barba — S/. 20">Diseño de Barba — S/. 20</option>
+              <option value="Coloración — S/. 50">Coloración — S/. 50</option>
+              <option value="Tratamiento Capilar — S/. 40">Tratamiento Capilar — S/. 40</option>
+            </select>
+          </div>
+
+          <div class="form-row" style="display:flex;gap:18px;">
+            <div style="flex:1;min-width:0;">
+              <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Fecha preferida</label>
+              <input type="date" class="barber-input" value="{{ fecha }}" onChange="{{ setFecha }}" />
+            </div>
+            <div style="flex:1;min-width:0;">
+              <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Hora preferida</label>
+              <input type="time" class="barber-input" value="{{ hora }}" onChange="{{ setHora }}" />
+            </div>
+          </div>
+
+          <div>
+            <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Notas / Estilo de referencia</label>
+            <textarea class="barber-input" placeholder="Cuéntanos qué estilo tienes en mente…" value="{{ notas }}" onChange="{{ setNotas }}"></textarea>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px;">
+            <button type="submit" disabled="{{ submitDisabled }}"
+              style="background:#2563EB;color:#fff;padding:16px 32px;border-radius:100px;font-weight:700;font-size:1rem;border:none;cursor:pointer;font-family:'Hanken Grotesk',sans-serif;transition:background .2s,transform .15s;box-shadow:0 6px 22px rgba(37,99,235,.3);width:100%;"
+              style-hover="background:#1A56D6;transform:translateY(-1px);">
+              Enviar solicitud de reserva
+            </button>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="flex:1;height:1px;background:rgba(28,24,20,.1);"></div>
+              <span style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:rgba(28,24,20,.35);">O TAMBIÉN</span>
+              <div style="flex:1;height:1px;background:rgba(28,24,20,.1);"></div>
+            </div>
+            <a href="{{ waDirectLink }}" target="_blank" rel="noopener"
+               style="background:rgba(34,197,94,.1);color:#1D9847;border:1.5px solid rgba(34,197,94,.3);padding:14px 32px;border-radius:100px;font-weight:600;font-size:.9375rem;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s;"
+               style-hover="background:rgba(34,197,94,.18);">
+              <svg width="20" height="20" viewBox="0 0 32 32" fill="#22C55E"><path d="M16 2.5C8.82 2.5 3 8.32 3 15.5c0 2.3.61 4.47 1.67 6.35L3 29l7.42-1.62A13.4 13.4 0 0016 28.5c7.18 0 13-5.82 13-13S23.18 2.5 16 2.5zm6.1 18.28c-.3-.15-1.79-.88-2.07-.98-.27-.1-.47-.15-.67.15-.2.3-.78.98-.96 1.18-.18.2-.36.22-.66.08-.3-.15-1.26-.47-2.4-1.49-.89-.8-1.49-1.78-1.66-2.08-.18-.3-.02-.46.13-.62.14-.14.3-.36.45-.54.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.63-.92-2.23-.24-.58-.49-.5-.67-.51-.18-.01-.38-.01-.58-.01-.2 0-.52.07-.8.38-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.12-.27-.2-.57-.34z"/></svg>
+              Reservar directamente por WhatsApp
+            </a>
+          </div>
+
+        </form>
+      </sc-if>
+
+      <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:24px 0;">
+          <div style="width:76px;height:76px;border-radius:50%;background:rgba(37,99,235,.1);border:2px solid rgba(37,99,235,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.875rem;font-weight:800;color:#1C1814;margin-bottom:12px;">¡Solicitud enviada!</h3>
+          <p style="color:rgba(28,24,20,.6);font-size:1rem;line-height:1.7;margin-bottom:32px;max-width:360px;margin-left:auto;margin-right:auto;">Recibimos tu solicitud. Te contactaremos pronto para confirmar tu cita en Árabe's Barber Studio.</p>
+          <a href="{{ waDirectLink }}" target="_blank" rel="noopener"
+             style="background:rgba(34,197,94,.1);color:#1D9847;border:1.5px solid rgba(34,197,94,.3);padding:14px 28px;border-radius:100px;font-weight:600;font-size:.9375rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;">
+            Confirmar también por WhatsApp →
+          </a>
+        </div>
+      </sc-if>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer style="background:#0D0B08;border-top:1px solid rgba(37,99,235,.08);padding:64px 32px 36px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="grid-ft" style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:52px;align-items:start;">
+      <div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+          <div style="width:50px;height:50px;border-radius:50%;overflow:hidden;border:2px solid rgba(37,99,235,.35);">
+            <img src="uploads/pasted-1782089821708-0.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
+          </div>
+          <div>
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.125rem;color:#F5F1E8;letter-spacing:-.01em;">ÁRABE'S</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;color:#2563EB;text-transform:uppercase;margin-top:2px;">Barber Studio</div>
+          </div>
+        </div>
+        <p style="font-size:.9375rem;color:rgba(245,241,232,.42);line-height:1.75;max-width:280px;margin-bottom:24px;">Tu estudio de barbería premium en Lima. Cortes con precisión, estilo y dedicación.</p>
+        <a href="{{ waLink }}" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:8px;color:#16A34A;font-size:.875rem;font-weight:600;text-decoration:none;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.22);padding:10px 18px;border-radius:100px;transition:background .2s;"
+           style-hover="background:rgba(34,197,94,.2);">
+          <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2.5C8.82 2.5 3 8.32 3 15.5c0 2.3.61 4.47 1.67 6.35L3 29l7.42-1.62A13.4 13.4 0 0016 28.5c7.18 0 13-5.82 13-13S23.18 2.5 16 2.5zm6.1 18.28c-.3-.15-1.79-.88-2.07-.98-.27-.1-.47-.15-.67.15-.2.3-.78.98-.96 1.18-.18.2-.36.22-.66.08-.3-.15-1.26-.47-2.4-1.49-.89-.8-1.49-1.78-1.66-2.08-.18-.3-.02-.46.13-.62.14-.14.3-.36.45-.54.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.63-.92-2.23-.24-.58-.49-.5-.67-.51-.18-.01-.38-.01-.58-.01-.2 0-.52.07-.8.38-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.12-.27-.2-.57-.34z"/></svg>
+          +51 957 950 654
+        </a>
+      </div>
+
+      <div>
+        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#2563EB;margin-bottom:20px;">Servicios</h4>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <span style="color:rgba(245,241,232,.45);font-size:.9375rem;">Corte Clásico</span>
+          <span style="color:rgba(245,241,232,.45);font-size:.9375rem;">Fade / Degradado</span>
+          <span style="color:rgba(245,241,232,.45);font-size:.9375rem;">Corte + Barba</span>
+          <span style="color:rgba(245,241,232,.45);font-size:.9375rem;">Diseño de Barba</span>
+          <span style="color:rgba(245,241,232,.45);font-size:.9375rem;">Coloración</span>
+          <span style="color:rgba(245,241,232,.45);font-size:.9375rem;">Tratamiento Capilar</span>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#2563EB;margin-bottom:20px;">Horarios</h4>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,241,232,.3);margin-bottom:4px;">Lun — Sáb</div>
+            <div style="color:rgba(245,241,232,.68);font-size:.9375rem;font-weight:500;">9:00 am – 8:00 pm</div>
+          </div>
+          <div>
+            <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,241,232,.3);margin-bottom:4px;">Domingo</div>
+            <div style="color:rgba(245,241,232,.68);font-size:.9375rem;font-weight:500;">9:00 am – 6:00 pm</div>
+          </div>
+          <div>
+            <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,241,232,.3);margin-bottom:4px;">WhatsApp</div>
+            <a href="{{ waLink }}" target="_blank" rel="noopener" style="color:#2563EB;font-size:.9375rem;font-weight:600;text-decoration:none;" style-hover="color:#F5F1E8;">+51 957 950 654</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(245,241,232,.05);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+      <span style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;color:rgba(245,241,232,.22);text-transform:uppercase;">© 2025 Árabe's Barber Studio · Lima, Perú</span>
+      <span style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;color:rgba(245,241,232,.16);text-transform:uppercase;">Hecho con dedicación</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    nombre: '', telefono: '', servicio: '',
+    fecha: '', hora: '', notas: '',
+    submitted: false,
+    navScrolled: false,
+    scrollPct: 0,
+    menuOpen: false,
+    activeSection: ''
+  };
+
+  componentDidMount() {
+    // Scroll progress + nav scroll state
+    this._onScroll = () => {
+      const y = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? parseFloat((y / max * 100).toFixed(1)) : 0;
+      const scrolled = y > 60;
+      if (scrolled !== this.state.navScrolled || Math.abs(pct - this.state.scrollPct) >= 0.4) {
+        this.setState({ navScrolled: scrolled, scrollPct: pct });
+      }
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+
+    // IntersectionObserver for active section
+    const sections = ['servicios', 'productos', 'galeria', 'reservar'];
+    this._observers = [];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) this.setState({ activeSection: id });
+        },
+        { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+      );
+      obs.observe(el);
+      this._observers.push(obs);
+    });
+  }
+
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    if (this._observers) this._observers.forEach(o => o.disconnect());
+  }
+
+  renderVals() {
+    const s = this.state;
+    const set = k => e => this.setState({ [k]: e.target.value });
+
+    const msgParts = [
+      "Hola! Me gustaría reservar una cita en Árabe's Barber Studio. 💈",
+      s.nombre    ? `👤 Nombre: ${s.nombre}`     : null,
+      s.telefono  ? `📱 Tel: ${s.telefono}`       : null,
+      s.servicio  ? `✂️ Servicio: ${s.servicio}`  : null,
+      s.fecha     ? `📅 Fecha: ${s.fecha}`         : null,
+      s.hora      ? `🕐 Hora: ${s.hora}`           : null,
+      s.notas     ? `📝 ${s.notas}`               : null
+    ].filter(Boolean);
+
+    const waLink = 'https://wa.me/51957950654';
+    const waDirectLink = waLink + '?text=' + encodeURIComponent(msgParts.join('\n'));
+
+    const handleSubmit = e => {
+      e.preventDefault();
+      if (!s.nombre || !s.telefono || !s.servicio) return;
+      this.setState({ submitted: true });
+    };
+
+    const open = s.menuOpen;
+
+    return {
+      progressStyle: {
+        position: 'fixed', top: 0, left: 0, zIndex: 201,
+        height: '3px',
+        background: 'linear-gradient(90deg,#2563EB 0%,#E8C96E 100%)',
+        width: s.scrollPct + '%',
+        pointerEvents: 'none',
+        borderRadius: '0 3px 3px 0',
+        transition: 'width .12s linear',
+        opacity: s.scrollPct > 0.5 ? 1 : 0
+      },
+      navStyle: {
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+        background: s.navScrolled ? 'rgba(255,255,255,.98)' : 'rgba(255,255,255,.92)',
+        backdropFilter: 'blur(22px)',
+        WebkitBackdropFilter: 'blur(22px)',
+        borderBottom: s.navScrolled
+          ? '1px solid rgba(37,99,235,.28)'
+          : '1px solid rgba(37,99,235,.14)',
+        boxShadow: s.navScrolled
+          ? '0 4px 32px rgba(28,24,20,.1), 0 1px 0 rgba(37,99,235,.18)'
+          : '0 1px 0 rgba(37,99,235,.1)',
+        transition: 'background .3s, box-shadow .3s, border-color .3s'
+      },
+      activeClass: {
+        servicios: s.activeSection === 'servicios' ? 'active' : '',
+        productos:  s.activeSection === 'productos'  ? 'active' : '',
+        galeria:   s.activeSection === 'galeria'   ? 'active' : '',
+        reservar:  s.activeSection === 'reservar'  ? 'active' : ''
+      },
+      menuOpen: open,
+      toggleMenu: () => this.setState(p => ({ menuOpen: !p.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      hbg1: open ? { transform: 'translateY(7px) rotate(45deg)' } : {},
+      hbg2: open ? { opacity: 0, transform: 'scaleX(0)' } : {},
+      hbg3: open ? { transform: 'translateY(-7px) rotate(-45deg)' } : {},
+      nombre: s.nombre, telefono: s.telefono, servicio: s.servicio,
+      fecha: s.fecha, hora: s.hora, notas: s.notas,
+      submitted: s.submitted, notSubmitted: !s.submitted,
+      submitDisabled: !(s.nombre && s.telefono && s.servicio),
+      setNombre: set('nombre'), setTelefono: set('telefono'), setServicio: set('servicio'),
+      setFecha: set('fecha'), setHora: set('hora'), setNotas: set('notas'),
+      handleSubmit,
+      waLink,
+      waDirectLink
+    };
+  }
+}
+</script>
+</body>
+</html>

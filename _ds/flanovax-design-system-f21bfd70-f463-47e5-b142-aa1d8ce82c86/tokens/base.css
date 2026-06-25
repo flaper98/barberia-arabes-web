@@ -1,0 +1,42 @@
+/* ============================================================
+   FLANOVAX · BASE — light element defaults built on tokens.
+   Opt-in helpers; components shouldn't depend on these resets.
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+}
+
+.fx-page {
+  background: var(--surface-page);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display headline helper */
+.fx-display {
+  font-family: var(--font-display);
+  font-weight: var(--w-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--text-strong);
+}
+
+/* Eyebrow / overline */
+.fx-overline {
+  font-family: var(--font-mono);
+  font-size: var(--t-overline);
+  font-weight: var(--w-bold);
+  letter-spacing: var(--ls-over);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+::selection {
+  background: var(--cobalt-200);
+  color: var(--ink-950);
+}

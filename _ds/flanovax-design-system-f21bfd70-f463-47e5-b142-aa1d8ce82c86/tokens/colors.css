@@ -1,0 +1,114 @@
+/* ============================================================
+   FLANOVAX · COLOR TOKENS
+   Primitive scales + semantic aliases.
+   Vibe: warm ink & paper neutrals, electric cobalt hero,
+   tangerine energy accent. Confident, digital, human.
+   ============================================================ */
+
+:root {
+  /* --- Brand: Cobalt (primary / hero) --- */
+  --cobalt-50:  #ECEDFF;
+  --cobalt-100: #D6D8FF;
+  --cobalt-200: #B0B3FF;
+  --cobalt-300: #8488FF;
+  --cobalt-400: #5358FB;
+  --cobalt-500: #2E33EC;  /* core brand cobalt */
+  --cobalt-600: #1F23C9;
+  --cobalt-700: #181BA0;
+  --cobalt-800: #15177A;
+  --cobalt-900: #11135A;
+
+  /* --- Brand: Tangerine (energy / secondary accent) --- */
+  --tangerine-50:  #FFEDE4;
+  --tangerine-100: #FFD8C6;
+  --tangerine-200: #FFB293;
+  --tangerine-300: #FF8A5C;
+  --tangerine-400: #FB6526;
+  --tangerine-500: #EF4E0C;  /* core tangerine */
+  --tangerine-600: #C73D06;
+  --tangerine-700: #9C3008;
+  --tangerine-800: #76270C;
+  --tangerine-900: #561F0E;
+
+  /* --- Warm neutral (ink → paper) --- */
+  --ink-950: #100E0A;  /* near-black, warm */
+  --ink-900: #17150F;
+  --ink-800: #262219;
+  --ink-700: #3A352A;
+  --ink-600: #564F40;
+  --ink-500: #756C59;
+  --ink-400: #9A917E;
+  --ink-300: #C0B8A6;
+  --ink-200: #DED7C7;
+  --ink-150: #E9E3D6;
+  --ink-100: #F0EBDF;
+  --paper:   #F5F1E8;  /* warm bone — default page surface */
+  --paper-raised: #FBF8F1;
+  --white:   #FFFFFF;
+
+  /* --- Mist (cool tint for subtle fills / cobalt-adjacent) --- */
+  --mist-50:  #F1F3FA;
+  --mist-100: #E5E9F5;
+  --mist-200: #CDD4EC;
+
+  /* --- Semantic status --- */
+  --green-500:  #1F9D55;
+  --green-100:  #D6F3E2;
+  --amber-500:  #E8A317;
+  --amber-100:  #FBEFCD;
+  --red-500:    #DC3838;
+  --red-100:    #FAD9D9;
+  --blue-500:   #2E33EC;
+  --blue-100:   #D6D8FF;
+
+  /* ==========================================================
+     SEMANTIC ALIASES — reference these in components
+     ========================================================== */
+
+  /* Brand */
+  --brand:            var(--cobalt-500);
+  --brand-hover:      var(--cobalt-600);
+  --brand-active:     var(--cobalt-700);
+  --brand-subtle:     var(--cobalt-50);
+  --brand-on:         var(--white);
+  --accent:           var(--tangerine-500);
+  --accent-hover:     var(--tangerine-600);
+  --accent-subtle:    var(--tangerine-50);
+  --accent-on:        var(--white);
+
+  /* Text */
+  --text-strong:      var(--ink-950);
+  --text-body:        var(--ink-800);
+  --text-muted:       var(--ink-500);
+  --text-subtle:      var(--ink-400);
+  --text-on-brand:    var(--white);
+  --text-on-ink:      var(--paper);
+  --text-link:        var(--cobalt-600);
+
+  /* Surfaces */
+  --surface-page:     var(--paper);
+  --surface-card:     var(--paper-raised);
+  --surface-raised:   var(--white);
+  --surface-ink:      var(--ink-950);
+  --surface-inset:    var(--ink-100);
+  --surface-mist:     var(--mist-50);
+
+  /* Lines & borders */
+  --border-subtle:    var(--ink-150);
+  --border-default:   var(--ink-200);
+  --border-strong:    var(--ink-300);
+  --border-ink:       var(--ink-950);
+
+  /* Status */
+  --success:          var(--green-500);
+  --success-subtle:   var(--green-100);
+  --warning:          var(--amber-500);
+  --warning-subtle:   var(--amber-100);
+  --danger:           var(--red-500);
+  --danger-subtle:    var(--red-100);
+  --info:             var(--blue-500);
+  --info-subtle:      var(--blue-100);
+
+  /* Focus ring */
+  --focus-ring:       var(--cobalt-400);
+}
