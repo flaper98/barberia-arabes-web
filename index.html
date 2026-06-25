@@ -770,6 +770,9 @@
               style-hover="background:#1A56D6;transform:translateY(-1px);">
               {{ submitText }}
             </button>
+            <sc-if value="{{ showHint }}" hint-placeholder-val="{{ false }}">
+              <p style="color:rgba(28,24,20,.45);font-size:.8rem;text-align:center;margin-top:-6px;font-family:'Space Mono',monospace;letter-spacing:.04em;">⚠ {{ submitHint }}</p>
+            </sc-if>
             <sc-if value="{{ submitError }}" hint-placeholder-val="{{ false }}">
               <p style="color:#DC2626;font-size:.875rem;text-align:center;margin-top:-4px;">Hubo un error al enviar. Por favor intenta de nuevo o usa WhatsApp.</p>
             </sc-if>
@@ -1004,6 +1007,13 @@ class Component extends DCLogic {
       submitDisabled: !(s.nombre && s.telefono && s.servicio && s.fecha && s.hora) || s.submitting,
       submitText: s.submitting ? 'Enviando...' : 'Enviar solicitud de reserva',
       submitError: s.submitError,
+      submitHint: !s.nombre ? 'Completa tu nombre completo'
+        : !s.telefono ? 'Completa tu número de WhatsApp'
+        : !s.servicio ? 'Selecciona un servicio'
+        : !s.fecha ? 'Selecciona la fecha de tu cita'
+        : !s.hora ? 'Selecciona la hora de tu cita'
+        : '',
+      showHint: !s.submitting && !(s.nombre && s.telefono && s.servicio && s.fecha && s.hora),
       setNombre: set('nombre'), setTelefono: set('telefono'), setServicio: set('servicio'),
       setFecha: set('fecha'), setHora: set('hora'), setNotas: set('notas'),
       handleSubmit,

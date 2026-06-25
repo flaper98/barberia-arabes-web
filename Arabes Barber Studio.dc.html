@@ -750,11 +750,11 @@
 
           <div class="form-row" style="display:flex;gap:18px;">
             <div style="flex:1;min-width:0;">
-              <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Fecha preferida</label>
+              <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Fecha preferida *</label>
               <input type="date" class="barber-input" value="{{ fecha }}" onChange="{{ setFecha }}" />
             </div>
             <div style="flex:1;min-width:0;">
-              <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Hora preferida</label>
+              <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Hora preferida *</label>
               <input type="time" class="barber-input" value="{{ hora }}" onChange="{{ setHora }}" />
             </div>
           </div>
@@ -768,8 +768,14 @@
             <button type="submit" disabled="{{ submitDisabled }}"
               style="background:#2563EB;color:#fff;padding:16px 32px;border-radius:100px;font-weight:700;font-size:1rem;border:none;cursor:pointer;font-family:'Hanken Grotesk',sans-serif;transition:background .2s,transform .15s;box-shadow:0 6px 22px rgba(37,99,235,.3);width:100%;"
               style-hover="background:#1A56D6;transform:translateY(-1px);">
-              Enviar solicitud de reserva
+              {{ submitText }}
             </button>
+            <sc-if value="{{ showHint }}" hint-placeholder-val="{{ false }}">
+              <p style="color:rgba(28,24,20,.45);font-size:.8rem;text-align:center;margin-top:-6px;font-family:'Space Mono',monospace;letter-spacing:.04em;">⚠ {{ submitHint }}</p>
+            </sc-if>
+            <sc-if value="{{ submitError }}" hint-placeholder-val="{{ false }}">
+              <p style="color:#DC2626;font-size:.875rem;text-align:center;margin-top:-4px;">Hubo un error al enviar. Por favor intenta de nuevo o usa WhatsApp.</p>
+            </sc-if>
             <div style="display:flex;align-items:center;gap:12px;">
               <div style="flex:1;height:1px;background:rgba(28,24,20,.1);"></div>
               <span style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:rgba(28,24,20,.35);">O TAMBIÉN</span>
@@ -870,6 +876,8 @@ class Component extends DCLogic {
     nombre: '', telefono: '', servicio: '',
     fecha: '', hora: '', notas: '',
     submitted: false,
+    submitting: false,
+    submitError: false,
     navScrolled: false,
     scrollPct: 0,
     menuOpen: false,
@@ -930,8 +938,29 @@ class Component extends DCLogic {
 
     const handleSubmit = e => {
       e.preventDefault();
-      if (!s.nombre || !s.telefono || !s.servicio) return;
-      this.setState({ submitted: true });
+      if (!s.nombre || !s.telefono || !s.servicio || !s.fecha || !s.hora) return;
+      this.setState({ submitting: true, submitError: false });
+      fetch('/api/citas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cliente_nombre: s.nombre,
+          telefono: s.telefono,
+          servicio: s.servicio,
+          fecha: s.fecha,
+          hora: s.hora,
+          notas: s.notas || null
+        })
+      })
+      .then(r => r.json().then(data => ({ ok: r.ok, data })))
+      .then(({ ok }) => {
+        if (ok) {
+          this.setState({ submitted: true, submitting: false });
+        } else {
+          this.setState({ submitting: false, submitError: true });
+        }
+      })
+      .catch(() => this.setState({ submitting: false, submitError: true }));
     };
 
     const open = s.menuOpen;
@@ -975,7 +1004,16 @@ class Component extends DCLogic {
       nombre: s.nombre, telefono: s.telefono, servicio: s.servicio,
       fecha: s.fecha, hora: s.hora, notas: s.notas,
       submitted: s.submitted, notSubmitted: !s.submitted,
-      submitDisabled: !(s.nombre && s.telefono && s.servicio),
+      submitDisabled: !(s.nombre && s.telefono && s.servicio && s.fecha && s.hora) || s.submitting,
+      submitText: s.submitting ? 'Enviando...' : 'Enviar solicitud de reserva',
+      submitError: s.submitError,
+      submitHint: !s.nombre ? 'Completa tu nombre completo'
+        : !s.telefono ? 'Completa tu número de WhatsApp'
+        : !s.servicio ? 'Selecciona un servicio'
+        : !s.fecha ? 'Selecciona la fecha de tu cita'
+        : !s.hora ? 'Selecciona la hora de tu cita'
+        : '',
+      showHint: !s.submitting && !(s.nombre && s.telefono && s.servicio && s.fecha && s.hora),
       setNombre: set('nombre'), setTelefono: set('telefono'), setServicio: set('servicio'),
       setFecha: set('fecha'), setHora: set('hora'), setNotas: set('notas'),
       handleSubmit,
