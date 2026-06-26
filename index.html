@@ -735,19 +735,6 @@
             </div>
           </div>
 
-          <div>
-            <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Servicio *</label>
-            <select class="barber-input" value="{{ servicio }}" onChange="{{ setServicio }}">
-              <option value="">Selecciona un servicio…</option>
-              <option value="Corte Clásico — S/. 20">Corte Clásico — S/. 20</option>
-              <option value="Fade / Degradado — S/. 25">Fade / Degradado — S/. 25</option>
-              <option value="Corte + Barba — S/. 35">Corte + Barba — S/. 35</option>
-              <option value="Diseño de Barba — S/. 20">Diseño de Barba — S/. 20</option>
-              <option value="Coloración — S/. 50">Coloración — S/. 50</option>
-              <option value="Tratamiento Capilar — S/. 40">Tratamiento Capilar — S/. 40</option>
-            </select>
-          </div>
-
           <div class="form-row" style="display:flex;gap:18px;">
             <div style="flex:1;min-width:0;">
               <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Fecha preferida *</label>
@@ -873,7 +860,7 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = {
-    nombre: '', telefono: '', servicio: '',
+    nombre: '', telefono: '',
     fecha: '', hora: '', notas: '',
     submitted: false,
     submitting: false,
@@ -927,7 +914,6 @@ class Component extends DCLogic {
       "Hola! Me gustaría reservar una cita en Árabe's Barber Studio. 💈",
       s.nombre    ? `👤 Nombre: ${s.nombre}`     : null,
       s.telefono  ? `📱 Tel: ${s.telefono}`       : null,
-      s.servicio  ? `✂️ Servicio: ${s.servicio}`  : null,
       s.fecha     ? `📅 Fecha: ${s.fecha}`         : null,
       s.hora      ? `🕐 Hora: ${s.hora}`           : null,
       s.notas     ? `📝 ${s.notas}`               : null
@@ -938,7 +924,7 @@ class Component extends DCLogic {
 
     const handleSubmit = e => {
       e.preventDefault();
-      if (!s.nombre || !s.telefono || !s.servicio || !s.fecha || !s.hora) return;
+      if (!s.nombre || !s.telefono || !s.fecha || !s.hora) return;
       this.setState({ submitting: true, submitError: false });
       fetch('/api/citas', {
         method: 'POST',
@@ -946,7 +932,6 @@ class Component extends DCLogic {
         body: JSON.stringify({
           cliente_nombre: s.nombre,
           telefono: s.telefono,
-          servicio: s.servicio,
           fecha: s.fecha,
           hora: s.hora,
           notas: s.notas || null
@@ -1004,17 +989,16 @@ class Component extends DCLogic {
       nombre: s.nombre, telefono: s.telefono, servicio: s.servicio,
       fecha: s.fecha, hora: s.hora, notas: s.notas,
       submitted: s.submitted, notSubmitted: !s.submitted,
-      submitDisabled: !(s.nombre && s.telefono && s.servicio && s.fecha && s.hora) || s.submitting,
+      submitDisabled: !(s.nombre && s.telefono && s.fecha && s.hora) || s.submitting,
       submitText: s.submitting ? 'Enviando...' : 'Enviar solicitud de reserva',
       submitError: s.submitError,
       submitHint: !s.nombre ? 'Completa tu nombre completo'
         : !s.telefono ? 'Completa tu número de WhatsApp'
-        : !s.servicio ? 'Selecciona un servicio'
         : !s.fecha ? 'Selecciona la fecha de tu cita'
         : !s.hora ? 'Selecciona la hora de tu cita'
         : '',
-      showHint: !s.submitting && !(s.nombre && s.telefono && s.servicio && s.fecha && s.hora),
-      setNombre: set('nombre'), setTelefono: set('telefono'), setServicio: set('servicio'),
+      showHint: !s.submitting && !(s.nombre && s.telefono && s.fecha && s.hora),
+      setNombre: set('nombre'), setTelefono: set('telefono'),
       setFecha: set('fecha'), setHora: set('hora'), setNotas: set('notas'),
       handleSubmit,
       waLink,
