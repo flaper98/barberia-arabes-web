@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Body inválido' });
   }
 
-  const { cliente_nombre, telefono, barbero_nombre, servicio, fecha, hora, notas } = body;
+  const { cliente_nombre, telefono, servicio, fecha, hora, notas } = body;
 
   if (!cliente_nombre || !fecha || !hora) {
     return res.status(400).json({ error: 'Nombre, fecha y hora son requeridos' });
@@ -49,9 +49,9 @@ module.exports = async (req, res) => {
   try {
     await client.connect();
     const result = await client.query(
-      `INSERT INTO citas (cliente_nombre, telefono, barbero_nombre, fecha, hora, notas, appointment_source)
-       VALUES ($1, $2, $3, $4, $5, $6, 'PUBLIC_WEB') RETURNING id`,
-      [cliente_nombre, telefono || null, barbero_nombre || null, fecha, hora, notasFinal]
+      `INSERT INTO citas (cliente_nombre, telefono, fecha, hora, notas, appointment_source)
+       VALUES ($1, $2, $3, $4, $5, 'PUBLIC_WEB') RETURNING id`,
+      [cliente_nombre, telefono || null, fecha, hora, notasFinal]
     );
     await client.end();
     console.log('Cita guardada id:', result.rows[0].id);
