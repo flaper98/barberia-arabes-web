@@ -748,16 +748,36 @@
             </select>
           </div>
 
+          <div>
+            <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Barbero *</label>
+            <select class="barber-input" value="{{ barbero }}" onChange="{{ setBarberoAndCheck }}">
+              <option value="">Selecciona un barbero…</option>
+              <!-- Editar estos nombres para que coincidan exactamente con los registrados en el sistema -->
+              <option value="Barbero 1">Barbero 1</option>
+              <option value="Barbero 2">Barbero 2</option>
+            </select>
+          </div>
+
           <div class="form-row" style="display:flex;gap:18px;">
             <div style="flex:1;min-width:0;">
               <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Fecha preferida *</label>
-              <input type="date" class="barber-input" value="{{ fecha }}" onChange="{{ setFecha }}" />
+              <input type="date" class="barber-input" value="{{ fecha }}" onChange="{{ setFechaAndCheck }}" />
             </div>
             <div style="flex:1;min-width:0;">
               <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Hora preferida *</label>
-              <input type="time" class="barber-input" value="{{ hora }}" onChange="{{ setHora }}" />
+              <input type="time" class="barber-input" value="{{ hora }}" onChange="{{ setHoraAndCheck }}" />
             </div>
           </div>
+
+          <sc-if value="{{ checkingDisp }}" hint-placeholder-val="{{ false }}">
+            <p style="color:rgba(28,24,20,.45);font-size:.85rem;text-align:center;font-family:'Space Mono',monospace;letter-spacing:.03em;">Verificando disponibilidad…</p>
+          </sc-if>
+          <sc-if value="{{ libreDisp }}" hint-placeholder-val="{{ false }}">
+            <p style="background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:12px;padding:12px 18px;color:#16A34A;font-size:.875rem;text-align:center;font-weight:600;">✓ Barbero disponible en ese horario</p>
+          </sc-if>
+          <sc-if value="{{ ocupadoDisp }}" hint-placeholder-val="{{ false }}">
+            <p style="background:#FEF2F2;border:1.5px solid #FECACA;border-radius:12px;padding:14px 18px;color:#DC2626;font-size:.875rem;text-align:center;font-weight:600;">⚠ El barbero ya tiene una cita en ese horario.<br/>Por favor elige otro horario u otro barbero.</p>
+          </sc-if>
 
           <div>
             <label style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.5);display:block;margin-bottom:8px;">Notas / Estilo de referencia</label>
@@ -873,15 +893,11 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = {
-    nombre: '', telefono: '', servicio: '',
+    nombre: '', telefono: '', servicio: '', barbero: '',
     fecha: '', hora: '', notas: '',
-    submitted: false,
-    submitting: false,
-    submitError: false,
-    navScrolled: false,
-    scrollPct: 0,
-    menuOpen: false,
-    activeSection: ''
+    submitted: false, submitting: false, submitError: false,
+    disponibilidad: 'idle', // idle | checking | libre | ocupado
+    navScrolled: false, scrollPct: 0, menuOpen: false, activeSection: ''
   };
 
   componentDidMount() {
@@ -919,26 +935,62 @@ class Component extends DCLogic {
     if (this._observers) this._observers.forEach(o => o.disconnect());
   }
 
+  checkDisponibilidad(barbero, fecha, hora) {
+    if (!barbero || !fecha || !hora) {
+      this.setState({ disponibilidad: 'idle' });
+      return;
+    }
+    this.setState({ disponibilidad: 'checking' });
+    fetch('/api/disponibilidad', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ barbero_nombre: barbero, fecha, hora })
+    })
+    .then(r => r.json())
+    .then(data => {
+      this.setState({ disponibilidad: data.disponible ? 'libre' : 'ocupado' });
+    })
+    .catch(() => this.setState({ disponibilidad: 'idle' }));
+  }
+
   renderVals() {
     const s = this.state;
     const set = k => e => this.setState({ [k]: e.target.value });
 
     const msgParts = [
       "Hola! Me gustaría reservar una cita en Árabe's Barber Studio. 💈",
-      s.nombre    ? `👤 Nombre: ${s.nombre}`     : null,
-      s.telefono  ? `📱 Tel: ${s.telefono}`       : null,
-      s.servicio  ? `✂️ Servicio: ${s.servicio}`  : null,
-      s.fecha     ? `📅 Fecha: ${s.fecha}`         : null,
-      s.hora      ? `🕐 Hora: ${s.hora}`           : null,
-      s.notas     ? `📝 ${s.notas}`               : null
+      s.nombre    ? `👤 Nombre: ${s.nombre}`       : null,
+      s.telefono  ? `📱 Tel: ${s.telefono}`         : null,
+      s.barbero   ? `💈 Barbero: ${s.barbero}`      : null,
+      s.servicio  ? `✂️ Servicio: ${s.servicio}`    : null,
+      s.fecha     ? `📅 Fecha: ${s.fecha}`           : null,
+      s.hora      ? `🕐 Hora: ${s.hora}`             : null,
+      s.notas     ? `📝 ${s.notas}`                 : null
     ].filter(Boolean);
 
     const waLink = 'https://wa.me/51957950654';
     const waDirectLink = waLink + '?text=' + encodeURIComponent(msgParts.join('\n'));
 
+    const setBarberoAndCheck = e => {
+      const barbero = e.target.value;
+      this.setState({ barbero, disponibilidad: 'idle' });
+      this.checkDisponibilidad(barbero, s.fecha, s.hora);
+    };
+    const setFechaAndCheck = e => {
+      const fecha = e.target.value;
+      this.setState({ fecha, disponibilidad: 'idle' });
+      this.checkDisponibilidad(s.barbero, fecha, s.hora);
+    };
+    const setHoraAndCheck = e => {
+      const hora = e.target.value;
+      this.setState({ hora, disponibilidad: 'idle' });
+      this.checkDisponibilidad(s.barbero, s.fecha, hora);
+    };
+
     const handleSubmit = e => {
       e.preventDefault();
-      if (!s.nombre || !s.telefono || !s.servicio || !s.fecha || !s.hora) return;
+      if (!s.nombre || !s.telefono || !s.barbero || !s.servicio || !s.fecha || !s.hora) return;
+      if (s.disponibilidad === 'ocupado' || s.disponibilidad === 'checking') return;
       this.setState({ submitting: true, submitError: false });
       fetch('/api/citas', {
         method: 'POST',
@@ -946,6 +998,7 @@ class Component extends DCLogic {
         body: JSON.stringify({
           cliente_nombre: s.nombre,
           telefono: s.telefono,
+          barbero_nombre: s.barbero,
           servicio: s.servicio,
           fecha: s.fecha,
           hora: s.hora,
@@ -1002,20 +1055,28 @@ class Component extends DCLogic {
       hbg2: open ? { opacity: 0, transform: 'scaleX(0)' } : {},
       hbg3: open ? { transform: 'translateY(-7px) rotate(-45deg)' } : {},
       nombre: s.nombre, telefono: s.telefono, servicio: s.servicio,
+      barbero: s.barbero,
       fecha: s.fecha, hora: s.hora, notas: s.notas,
       submitted: s.submitted, notSubmitted: !s.submitted,
-      submitDisabled: !(s.nombre && s.telefono && s.servicio && s.fecha && s.hora) || s.submitting,
+      checkingDisp: s.disponibilidad === 'checking',
+      libreDisp:    s.disponibilidad === 'libre',
+      ocupadoDisp:  s.disponibilidad === 'ocupado',
+      submitDisabled: !(s.nombre && s.telefono && s.barbero && s.servicio && s.fecha && s.hora)
+        || s.submitting || s.disponibilidad === 'ocupado' || s.disponibilidad === 'checking',
       submitText: s.submitting ? 'Enviando...' : 'Enviar solicitud de reserva',
       submitError: s.submitError,
       submitHint: !s.nombre ? 'Completa tu nombre completo'
         : !s.telefono ? 'Completa tu número de WhatsApp'
+        : !s.barbero ? 'Selecciona un barbero'
         : !s.servicio ? 'Selecciona un servicio'
         : !s.fecha ? 'Selecciona la fecha de tu cita'
         : !s.hora ? 'Selecciona la hora de tu cita'
+        : s.disponibilidad === 'ocupado' ? 'Ese horario no está disponible'
         : '',
-      showHint: !s.submitting && !(s.nombre && s.telefono && s.servicio && s.fecha && s.hora),
+      showHint: !s.submitting && (!(s.nombre && s.telefono && s.barbero && s.servicio && s.fecha && s.hora) || s.disponibilidad === 'ocupado'),
       setNombre: set('nombre'), setTelefono: set('telefono'), setServicio: set('servicio'),
-      setFecha: set('fecha'), setHora: set('hora'), setNotas: set('notas'),
+      setBarberoAndCheck, setFechaAndCheck, setHoraAndCheck,
+      setNotas: set('notas'),
       handleSubmit,
       waLink,
       waDirectLink

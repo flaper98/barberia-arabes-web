@@ -14,6 +14,12 @@ module.exports = async (req, res) => {
     console.error('DATABASE_URL no configurada');
     return res.status(500).json({ error: 'Configuración de base de datos faltante' });
   }
+  try {
+    const _u = new URL(process.env.DATABASE_URL);
+    console.log('DB host:', _u.hostname, '| user:', _u.username);
+  } catch (e) {
+    console.error('DATABASE_URL inválida:', e.message);
+  }
 
   // Vercel parsea req.body automáticamente para application/json
   let body = req.body;
@@ -24,7 +30,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Body inválido' });
   }
 
-  const { cliente_nombre, telefono, servicio, fecha, hora, notas } = body;
+  const { cliente_nombre, telefono, barbero_nombre, servicio, fecha, hora, notas } = body;
 
   if (!cliente_nombre || !fecha || !hora) {
     return res.status(400).json({ error: 'Nombre, fecha y hora son requeridos' });
@@ -43,9 +49,9 @@ module.exports = async (req, res) => {
   try {
     await client.connect();
     const result = await client.query(
-      `INSERT INTO citas (cliente_nombre, telefono, fecha, hora, notas, appointment_source)
-       VALUES ($1, $2, $3, $4, $5, 'PUBLIC_WEB') RETURNING id`,
-      [cliente_nombre, telefono || null, fecha, hora, notasFinal]
+      `INSERT INTO citas (cliente_nombre, telefono, barbero_nombre, fecha, hora, notas, appointment_source)
+       VALUES ($1, $2, $3, $4, $5, $6, 'PUBLIC_WEB') RETURNING id`,
+      [cliente_nombre, telefono || null, barbero_nombre || null, fecha, hora, notasFinal]
     );
     await client.end();
     console.log('Cita guardada id:', result.rows[0].id);
@@ -53,6 +59,6 @@ module.exports = async (req, res) => {
   } catch (err) {
     console.error('Error DB:', err.message, '| code:', err.code);
     try { await client.end(); } catch {}
-    return res.status(500).json({ error: 'Error al registrar la cita.' });
+    return res.status(500).json({ error: 'Error al registrar la cita.', debug: err.message, code: err.code });
   }
 };
