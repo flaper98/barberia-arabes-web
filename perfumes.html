@@ -72,19 +72,19 @@
     .nav-anim { animation: navIn .55s .05s cubic-bezier(0.2,0.8,0.2,1) both; }
 
     .nav-link {
-      position: relative; color: rgba(28,24,20,.58);
+      position: relative; color: rgba(245,241,232,.68);
       text-decoration: none; font-weight: 500; font-size: .9375rem;
       padding: 6px 12px 6px; border-radius: 8px;
       transition: color .22s, background .22s;
     }
     .nav-link::after {
       content: ''; position: absolute; bottom: 0; left: 12px;
-      width: 0; height: 2px; background: #D4A550;
+      width: 0; height: 2px; background: #F5F1E8;
       border-radius: 2px; transition: width .28s cubic-bezier(0.4,0,0.2,1);
     }
-    .nav-link:hover { color: #1C1814; background: rgba(212,165,80,.1); }
+    .nav-link:hover { color: #fff; background: rgba(255,255,255,.08); }
     .nav-link:hover::after { width: calc(100% - 24px); }
-    .nav-link.active { color: #1C1814; background: rgba(212,165,80,.12); font-weight: 600; }
+    .nav-link.active { color: #fff; background: rgba(255,255,255,.14); font-weight: 600; }
     .nav-link.active::after { width: calc(100% - 24px); }
 
     .nav-cta {
@@ -95,7 +95,7 @@
       transition: background .2s, transform .15s, box-shadow .2s;
       box-shadow: 0 4px 18px rgba(28,24,20,.22);
     }
-    .nav-cta:hover { background: #D4A550; color: #1C1814; transform: translateY(-1px); box-shadow: 0 7px 24px rgba(212,165,80,.35); }
+    .nav-cta:hover { background: #3A352A; color: #F5F1E8; transform: translateY(-1px); box-shadow: 0 7px 24px rgba(0,0,0,.3); }
 
     @keyframes ringRotate {
       from { transform: rotate(0deg); }
@@ -104,40 +104,40 @@
     .logo-outer { position: relative; width: 50px; height: 50px; flex-shrink: 0; }
     .logo-outer::before {
       content: ''; position: absolute; inset: -3px; border-radius: 50%;
-      background: conic-gradient(#D4A550 0%, #E8C077 30%, transparent 50%, #D4A550 100%);
-      animation: ringRotate 3.5s linear infinite; opacity: .75;
+      background: conic-gradient(#F5F1E8 0%, rgba(245,241,232,.3) 30%, transparent 50%, #F5F1E8 100%);
+      animation: ringRotate 3.5s linear infinite; opacity: .7;
     }
     .logo-outer::after { content: ''; position: absolute; inset: -1px; border-radius: 50%; background: rgba(255,255,255,.97); }
     .logo-ring-wrap {
       position: relative; z-index: 1; width: 46px; height: 46px; border-radius: 50%; overflow: hidden;
-      border: 2px solid rgba(212,165,80,.4); transition: box-shadow .35s;
+      border: 2px solid rgba(255,255,255,.35); transition: box-shadow .35s;
     }
-    .logo-outer:hover .logo-ring-wrap { box-shadow: 0 0 0 2px rgba(212,165,80,.3), 0 4px 16px rgba(212,165,80,.3); }
+    .logo-outer:hover .logo-ring-wrap { box-shadow: 0 0 0 2px rgba(255,255,255,.3), 0 4px 16px rgba(0,0,0,.28); }
 
     .hbg {
       display: none; flex-direction: column; justify-content: center; gap: 5px;
       width: 40px; height: 40px; cursor: pointer; border: none; background: none;
       padding: 8px; border-radius: 8px; transition: background .2s; flex-shrink: 0;
     }
-    .hbg:hover { background: rgba(28,24,20,.07); }
+    .hbg:hover { background: rgba(255,255,255,.08); }
     .hbg span {
-      display: block; width: 22px; height: 2px; background: #1C1814;
+      display: block; width: 22px; height: 2px; background: #F5F1E8;
       border-radius: 2px; transform-origin: center;
       transition: transform .28s cubic-bezier(0.4,0,0.2,1), opacity .2s;
     }
     .mob-menu {
-      border-top: 1px solid rgba(212,165,80,.18);
-      background: rgba(255,255,255,.98);
+      border-top: 1px solid rgba(255,255,255,.1);
+      background: rgba(13,11,8,.98);
       padding: 12px 24px 24px;
       display: flex; flex-direction: column;
     }
     .mob-menu a {
-      color: rgba(28,24,20,.72); text-decoration: none; font-weight: 500;
+      color: rgba(245,241,232,.75); text-decoration: none; font-weight: 500;
       font-size: 1.0625rem; padding: 13px 0;
-      border-bottom: 1px solid rgba(0,0,0,.05);
+      border-bottom: 1px solid rgba(255,255,255,.06);
       transition: color .2s;
     }
-    .mob-menu a:hover { color: #1C1814; }
+    .mob-menu a:hover { color: #fff; }
     .mob-menu a:last-child { border-bottom: none; }
     @media (max-width: 880px) { .hbg { display: flex !important; } }
   </style>
@@ -160,14 +160,14 @@
     <a href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;">
       <div class="logo-outer">
         <div class="logo-ring-wrap" style="background:#1C1814;display:flex;align-items:center;justify-content:center;">
-          <svg width="22" height="22" viewBox="0 0 48 48" fill="none" stroke="#D4A550" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="22" height="22" viewBox="0 0 48 48" fill="none" stroke="#F5F1E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 6h8v6h-8z"/><path d="M16 14h16l3 7v17a5 5 0 01-5 5H18a5 5 0 01-5-5V21z"/><path d="M11 21h26"/>
           </svg>
         </div>
       </div>
       <div>
-        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.1rem;color:#1C1814;letter-spacing:-.015em;line-height:1.1;">PERFULUX</div>
-        <div style="font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.16em;color:rgba(28,24,20,.45);text-transform:uppercase;margin-top:2px;">By Árabe's</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.1rem;color:#F5F1E8;letter-spacing:-.015em;line-height:1.1;">PERFULUX</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.16em;color:rgba(245,241,232,.45);text-transform:uppercase;margin-top:2px;">By Árabe's</div>
       </div>
     </a>
 
@@ -200,7 +200,7 @@
 
 <!-- ═══ HERO ═══ -->
 <section style="position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#0D0B08;">
-  <div style="position:absolute;inset:0;background:radial-gradient(circle at 20% 15%,rgba(212,165,80,.22) 0%,transparent 55%),radial-gradient(circle at 82% 78%,rgba(212,165,80,.14) 0%,transparent 50%);"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 20% 15%,rgba(212,165,80,.06) 0%,transparent 55%),radial-gradient(circle at 82% 78%,rgba(212,165,80,.04) 0%,transparent 50%);"></div>
   <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(212,165,80,.6),transparent);"></div>
   <div style="position:relative;z-index:1;text-align:center;padding:120px 24px 80px;max-width:900px;width:100%;">
     <p class="a1" style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.18em;color:rgba(245,241,232,.7);text-transform:uppercase;margin-bottom:22px;">Perfulux · Pucallpa, Perú</p>
@@ -211,7 +211,7 @@
       Fragancias árabes de alta concentración, inspiradas en el oud, el ámbar y las especias de Oriente. Larga duración, carácter propio.
     </p>
     <div class="hero-ctas a4" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-      <a href="#coleccion" style="background:#D4A550;color:#1C1814;padding:16px 38px;border-radius:100px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s;box-shadow:0 8px 32px rgba(212,165,80,.28);" style-hover="background:#E8C077;transform:translateY(-2px);">
+      <a href="#coleccion" style="background:#1C1814;color:#F5F1E8;padding:16px 38px;border-radius:100px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s;box-shadow:0 8px 32px rgba(0,0,0,.3);" style-hover="background:#D4A550;color:#1C1814;transform:translateY(-2px);">
         Ver colección →
       </a>
       <a href="#familias" style="background:rgba(255,255,255,.08);color:#F5F1E8;border:1.5px solid rgba(245,241,232,.28);padding:15px 32px;border-radius:100px;font-weight:600;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:border-color .2s,color .2s;" style-hover="border-color:#D4A550;color:#D4A550;">
@@ -244,52 +244,64 @@
 
     <div class="grid-3 stagger" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
 
-      <div class="fam-card" style="background:#FFFFFF;border:1.5px solid rgba(212,165,80,.16);border-radius:18px;padding:28px 24px;">
-        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(145deg,#1C1814,#2D2820);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
-          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#D4A550" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3C13 3 5 11 5 16a8 8 0 0016 0c0-5-8-13-8-13Z"/></svg>
+      <div class="fam-card" style="background:#FFFFFF;border:1.5px solid rgba(212,165,80,.16);border-radius:18px;overflow:hidden;">
+        <div style="height:150px;background:linear-gradient(145deg,#6B3A28,#4A281B);display:flex;align-items:center;justify-content:center;">
+          <svg width="42" height="42" viewBox="0 0 26 26" fill="none" stroke="#F5F1E8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3C13 3 5 11 5 16a8 8 0 0016 0c0-5-8-13-8-13Z"/></svg>
         </div>
-        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#1C1814;margin-bottom:8px;">Oriental / Oud</h3>
-        <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.62;">Resina de agar, intensa y envolvente. El corazón de la perfumería árabe tradicional.</p>
+        <div style="padding:24px 24px 28px;">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#1C1814;margin-bottom:8px;">Oriental / Oud</h3>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.62;">Resina de agar, intensa y envolvente. El corazón de la perfumería árabe tradicional.</p>
+        </div>
       </div>
 
-      <div class="fam-card" style="background:#FFFFFF;border:1.5px solid rgba(212,165,80,.16);border-radius:18px;padding:28px 24px;">
-        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(145deg,#1C1814,#2D2820);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
-          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#D4A550" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2v22M6 8l7-3 7 3M4 14h18"/></svg>
+      <div class="fam-card" style="background:#FFFFFF;border:1.5px solid rgba(212,165,80,.16);border-radius:18px;overflow:hidden;">
+        <div style="height:150px;background:linear-gradient(145deg,#9C7A45,#6E5730);display:flex;align-items:center;justify-content:center;">
+          <svg width="42" height="42" viewBox="0 0 26 26" fill="none" stroke="#F5F1E8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2v22M6 8l7-3 7 3M4 14h18"/></svg>
         </div>
-        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#1C1814;margin-bottom:8px;">Amaderado</h3>
-        <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.62;">Sándalo, cedro y vetiver. Cálido, terroso y de carácter marcado.</p>
+        <div style="padding:24px 24px 28px;">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#1C1814;margin-bottom:8px;">Amaderado</h3>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.62;">Sándalo, cedro y vetiver. Cálido, terroso y de carácter marcado.</p>
+        </div>
       </div>
 
-      <div class="fam-card" style="background:#FFFFFF;border:1.5px solid rgba(212,165,80,.16);border-radius:18px;padding:28px 24px;">
-        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(145deg,#1C1814,#2D2820);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
-          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#D4A550" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="13" r="6"/><path d="M13 2v4M13 20v4M2 13h4M20 13h4M5 5l3 3M18 18l3 3M21 5l-3 3M8 18l-3 3"/></svg>
+      <div class="fam-card" style="background:#FFFFFF;border:1.5px solid rgba(212,165,80,.16);border-radius:18px;overflow:hidden;">
+        <div style="height:150px;background:linear-gradient(145deg,#E0B45C,#B8863B);display:flex;align-items:center;justify-content:center;">
+          <svg width="42" height="42" viewBox="0 0 26 26" fill="none" stroke="#F5F1E8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="13" r="6"/><path d="M13 2v4M13 20v4M2 13h4M20 13h4M5 5l3 3M18 18l3 3M21 5l-3 3M8 18l-3 3"/></svg>
         </div>
-        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#1C1814;margin-bottom:8px;">Cítrico Fresco</h3>
-        <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.62;">Bergamota, limón y toronja. Luminoso, energizante, ideal de día.</p>
+        <div style="padding:24px 24px 28px;">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#1C1814;margin-bottom:8px;">Cítrico Fresco</h3>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.62;">Bergamota, limón y toronja. Luminoso, energizante, ideal de día.</p>
+        </div>
       </div>
 
-      <div class="fam-card" style="background:#FFFFFF;border:1.5px solid rgba(212,165,80,.16);border-radius:18px;padding:28px 24px;">
-        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(145deg,#1C1814,#2D2820);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
-          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#D4A550" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4c3 3 7 6 7 11a7 7 0 01-14 0c0-5 4-8 7-11Z"/></svg>
+      <div class="fam-card" style="background:#FFFFFF;border:1.5px solid rgba(212,165,80,.16);border-radius:18px;overflow:hidden;">
+        <div style="height:150px;background:linear-gradient(145deg,#C98A6B,#9C6650);display:flex;align-items:center;justify-content:center;">
+          <svg width="42" height="42" viewBox="0 0 26 26" fill="none" stroke="#F5F1E8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4c3 3 7 6 7 11a7 7 0 01-14 0c0-5 4-8 7-11Z"/></svg>
         </div>
-        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#1C1814;margin-bottom:8px;">Floral</h3>
-        <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.62;">Rosa, jazmín y azahar. Elegante, versátil y atemporal.</p>
+        <div style="padding:24px 24px 28px;">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#1C1814;margin-bottom:8px;">Floral</h3>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.62;">Rosa, jazmín y azahar. Elegante, versátil y atemporal.</p>
+        </div>
       </div>
 
-      <div class="fam-card" style="background:#FFFFFF;border:1.5px solid rgba(212,165,80,.16);border-radius:18px;padding:28px 24px;">
-        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(145deg,#1C1814,#2D2820);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
-          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#D4A550" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3v6M13 3c-3 2-4 5-2 8M13 3c3 2 4 5 2 8"/><path d="M6 12h14l-1.5 10a3 3 0 01-3 2.5h-5a3 3 0 01-3-2.5L6 12Z"/></svg>
+      <div class="fam-card" style="background:#FFFFFF;border:1.5px solid rgba(212,165,80,.16);border-radius:18px;overflow:hidden;">
+        <div style="height:150px;background:linear-gradient(145deg,#B8863B,#8A6329);display:flex;align-items:center;justify-content:center;">
+          <svg width="42" height="42" viewBox="0 0 26 26" fill="none" stroke="#F5F1E8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3v6M13 3c-3 2-4 5-2 8M13 3c3 2 4 5 2 8"/><path d="M6 12h14l-1.5 10a3 3 0 01-3 2.5h-5a3 3 0 01-3-2.5L6 12Z"/></svg>
         </div>
-        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#1C1814;margin-bottom:8px;">Dulce / Gourmand</h3>
-        <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.62;">Vainilla, caramelo y ámbar dulce. Envolvente y muy memorable.</p>
+        <div style="padding:24px 24px 28px;">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#1C1814;margin-bottom:8px;">Dulce / Gourmand</h3>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.62;">Vainilla, caramelo y ámbar dulce. Envolvente y muy memorable.</p>
+        </div>
       </div>
 
-      <div class="fam-card" style="background:#FFFFFF;border:1.5px solid rgba(212,165,80,.16);border-radius:18px;padding:28px 24px;">
-        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(145deg,#1C1814,#2D2820);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
-          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#D4A550" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="18" cy="9" r="3"/><circle cx="13" cy="18" r="3"/></svg>
+      <div class="fam-card" style="background:#FFFFFF;border:1.5px solid rgba(212,165,80,.16);border-radius:18px;overflow:hidden;">
+        <div style="height:150px;background:linear-gradient(145deg,#8B4A2E,#602F1A);display:flex;align-items:center;justify-content:center;">
+          <svg width="42" height="42" viewBox="0 0 26 26" fill="none" stroke="#F5F1E8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="18" cy="9" r="3"/><circle cx="13" cy="18" r="3"/></svg>
         </div>
-        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#1C1814;margin-bottom:8px;">Especiado</h3>
-        <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.62;">Cardamomo, canela y pimienta rosa. Carácter, calidez y misterio.</p>
+        <div style="padding:24px 24px 28px;">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#1C1814;margin-bottom:8px;">Especiado</h3>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.62;">Cardamomo, canela y pimienta rosa. Carácter, calidez y misterio.</p>
+        </div>
       </div>
 
     </div>
@@ -362,10 +374,23 @@
 
       <!-- Oud Real -->
       <div class="p-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
-        <div style="height:148px;background:linear-gradient(135deg,#1C1814 0%,#3A352A 100%);display:flex;align-items:center;justify-content:center;">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#D4A550" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 6h8v6h-8z"/><path d="M16 14h16l3 7v17a5 5 0 01-5 5H18a5 5 0 01-5-5V21z"/><path d="M11 21h26"/>
-          </svg>
+        <div style="height:172px;background:#F1ECE0;display:flex;align-items:center;justify-content:center;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:32px;height:18px;background:#6B3A28;border-radius:6px 6px 2px 2px;box-shadow:inset 0 -4px 6px rgba(0,0,0,.22);"></div>
+            <div style="width:16px;height:8px;background:#6B3A28;opacity:.85;"></div>
+            <div style="width:104px;height:110px;background:#1C1814;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;overflow:hidden;">
+              <div style="font-family:'Space Mono',monospace;font-size:.36rem;letter-spacing:.14em;color:rgba(245,241,232,.32);text-transform:uppercase;">Perfulux</div>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.56rem;color:#F5F1E8;text-transform:uppercase;line-height:1.15;">Oud Real</div>
+                <div style="margin-top:5px;"><span class="display" style="font-size:1rem;color:#B5714F;line-height:1;">O1</span></div>
+                <div style="display:flex;gap:2px;justify-content:center;margin-top:4px;">
+                  <span style="width:4px;height:4px;border-radius:1px;background:#B5714F;"></span>
+                  <span style="width:4px;height:4px;border-radius:1px;background:#B5714F;"></span>
+                  <span style="width:4px;height:4px;border-radius:1px;background:#B5714F;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div style="padding:22px 22px 24px;">
           <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-bottom:8px;">ORIENTAL / OUD</div>
@@ -378,10 +403,23 @@
 
       <!-- Sándalo Imperial -->
       <div class="p-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
-        <div style="height:148px;background:linear-gradient(135deg,#8A6A3A 0%,#5E4726 100%);display:flex;align-items:center;justify-content:center;">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 6h12v8h-12z"/><path d="M15 14h18l2 6v20a4 4 0 01-4 4H17a4 4 0 01-4-4V20z"/><path d="M20 26h8M20 32h8"/>
-          </svg>
+        <div style="height:172px;background:#F1ECE0;display:flex;align-items:center;justify-content:center;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:32px;height:18px;background:#9C7A45;border-radius:6px 6px 2px 2px;box-shadow:inset 0 -4px 6px rgba(0,0,0,.22);"></div>
+            <div style="width:16px;height:8px;background:#9C7A45;opacity:.85;"></div>
+            <div style="width:104px;height:110px;background:#1C1814;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;overflow:hidden;">
+              <div style="font-family:'Space Mono',monospace;font-size:.36rem;letter-spacing:.14em;color:rgba(245,241,232,.32);text-transform:uppercase;">Perfulux</div>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.56rem;color:#F5F1E8;text-transform:uppercase;line-height:1.15;">Sándalo Imperial</div>
+                <div style="margin-top:5px;"><span class="display" style="font-size:1rem;color:#C0A06B;line-height:1;">A2</span></div>
+                <div style="display:flex;gap:2px;justify-content:center;margin-top:4px;">
+                  <span style="width:4px;height:4px;border-radius:1px;background:#C0A06B;"></span>
+                  <span style="width:4px;height:4px;border-radius:1px;background:#C0A06B;"></span>
+                  <span style="width:4px;height:4px;border-radius:1px;background:#C0A06B;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div style="padding:22px 22px 24px;">
           <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-bottom:8px;">AMADERADO</div>
@@ -394,10 +432,23 @@
 
       <!-- Bergamota Dorada -->
       <div class="p-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
-        <div style="height:148px;background:linear-gradient(135deg,#D4A550 0%,#B8863B 100%);display:flex;align-items:center;justify-content:center;">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#1C1814" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 6h12v8h-12z"/><path d="M15 14h18l2 6v20a4 4 0 01-4 4H17a4 4 0 01-4-4V20z"/><circle cx="24" cy="28" r="6"/>
-          </svg>
+        <div style="height:172px;background:#F1ECE0;display:flex;align-items:center;justify-content:center;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:32px;height:18px;background:#E0B45C;border-radius:6px 6px 2px 2px;box-shadow:inset 0 -4px 6px rgba(0,0,0,.22);"></div>
+            <div style="width:16px;height:8px;background:#E0B45C;opacity:.85;"></div>
+            <div style="width:104px;height:110px;background:#1C1814;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;overflow:hidden;">
+              <div style="font-family:'Space Mono',monospace;font-size:.36rem;letter-spacing:.14em;color:rgba(245,241,232,.32);text-transform:uppercase;">Perfulux</div>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.56rem;color:#F5F1E8;text-transform:uppercase;line-height:1.15;">Bergamota Dorada</div>
+                <div style="margin-top:5px;"><span class="display" style="font-size:1rem;color:#E9C580;line-height:1;">C3</span></div>
+                <div style="display:flex;gap:2px;justify-content:center;margin-top:4px;">
+                  <span style="width:4px;height:4px;border-radius:1px;background:#E9C580;"></span>
+                  <span style="width:4px;height:4px;border-radius:1px;background:#E9C580;"></span>
+                  <span style="width:4px;height:4px;border-radius:1px;background:rgba(245,241,232,.2);"></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div style="padding:22px 22px 24px;">
           <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-bottom:8px;">CÍTRICO FRESCO</div>
@@ -410,10 +461,23 @@
 
       <!-- Jazmín de Damasco -->
       <div class="p-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
-        <div style="height:148px;background:linear-gradient(135deg,#1C1814 0%,#3A352A 100%);display:flex;align-items:center;justify-content:center;">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#D4A550" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 6h12v8h-12z"/><path d="M15 14h18l2 6v20a4 4 0 01-4 4H17a4 4 0 01-4-4V20z"/><path d="M24 24c3 3 7 4 7 8a7 7 0 01-14 0c0-4 4-5 7-8Z"/>
-          </svg>
+        <div style="height:172px;background:#F1ECE0;display:flex;align-items:center;justify-content:center;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:32px;height:18px;background:#C98A6B;border-radius:6px 6px 2px 2px;box-shadow:inset 0 -4px 6px rgba(0,0,0,.22);"></div>
+            <div style="width:16px;height:8px;background:#C98A6B;opacity:.85;"></div>
+            <div style="width:104px;height:110px;background:#1C1814;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;overflow:hidden;">
+              <div style="font-family:'Space Mono',monospace;font-size:.36rem;letter-spacing:.14em;color:rgba(245,241,232,.32);text-transform:uppercase;">Perfulux</div>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.56rem;color:#F5F1E8;text-transform:uppercase;line-height:1.15;">Jazmín de Damasco</div>
+                <div style="margin-top:5px;"><span class="display" style="font-size:1rem;color:#DBA98F;line-height:1;">F4</span></div>
+                <div style="display:flex;gap:2px;justify-content:center;margin-top:4px;">
+                  <span style="width:4px;height:4px;border-radius:1px;background:#DBA98F;"></span>
+                  <span style="width:4px;height:4px;border-radius:1px;background:#DBA98F;"></span>
+                  <span style="width:4px;height:4px;border-radius:1px;background:rgba(245,241,232,.2);"></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div style="padding:22px 22px 24px;">
           <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-bottom:8px;">FLORAL</div>
@@ -426,10 +490,23 @@
 
       <!-- Ámbar & Vainilla -->
       <div class="p-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
-        <div style="height:148px;background:linear-gradient(135deg,#8A6A3A 0%,#5E4726 100%);display:flex;align-items:center;justify-content:center;">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 6h8v6h-8z"/><path d="M16 14h16l3 7v17a5 5 0 01-5 5H18a5 5 0 01-5-5V21z"/><path d="M17 26h14"/>
-          </svg>
+        <div style="height:172px;background:#F1ECE0;display:flex;align-items:center;justify-content:center;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:32px;height:18px;background:#B8863B;border-radius:6px 6px 2px 2px;box-shadow:inset 0 -4px 6px rgba(0,0,0,.22);"></div>
+            <div style="width:16px;height:8px;background:#B8863B;opacity:.85;"></div>
+            <div style="width:104px;height:110px;background:#1C1814;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;overflow:hidden;">
+              <div style="font-family:'Space Mono',monospace;font-size:.36rem;letter-spacing:.14em;color:rgba(245,241,232,.32);text-transform:uppercase;">Perfulux</div>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.56rem;color:#F5F1E8;text-transform:uppercase;line-height:1.15;">Ámbar & Vainilla</div>
+                <div style="margin-top:5px;"><span class="display" style="font-size:1rem;color:#D9B26B;line-height:1;">D5</span></div>
+                <div style="display:flex;gap:2px;justify-content:center;margin-top:4px;">
+                  <span style="width:4px;height:4px;border-radius:1px;background:#D9B26B;"></span>
+                  <span style="width:4px;height:4px;border-radius:1px;background:#D9B26B;"></span>
+                  <span style="width:4px;height:4px;border-radius:1px;background:#D9B26B;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div style="padding:22px 22px 24px;">
           <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-bottom:8px;">DULCE / GOURMAND</div>
@@ -442,10 +519,23 @@
 
       <!-- Especias de Oriente -->
       <div class="p-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
-        <div style="height:148px;background:linear-gradient(135deg,#D4A550 0%,#B8863B 100%);display:flex;align-items:center;justify-content:center;">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#1C1814" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="16" cy="16" r="5"/><circle cx="32" cy="16" r="5"/><circle cx="24" cy="32" r="5"/>
-          </svg>
+        <div style="height:172px;background:#F1ECE0;display:flex;align-items:center;justify-content:center;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:32px;height:18px;background:#8B4A2E;border-radius:6px 6px 2px 2px;box-shadow:inset 0 -4px 6px rgba(0,0,0,.22);"></div>
+            <div style="width:16px;height:8px;background:#8B4A2E;opacity:.85;"></div>
+            <div style="width:104px;height:110px;background:#1C1814;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;overflow:hidden;">
+              <div style="font-family:'Space Mono',monospace;font-size:.36rem;letter-spacing:.14em;color:rgba(245,241,232,.32);text-transform:uppercase;">Perfulux</div>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.56rem;color:#F5F1E8;text-transform:uppercase;line-height:1.15;">Especias de Oriente</div>
+                <div style="margin-top:5px;"><span class="display" style="font-size:1rem;color:#C67955;line-height:1;">E6</span></div>
+                <div style="display:flex;gap:2px;justify-content:center;margin-top:4px;">
+                  <span style="width:4px;height:4px;border-radius:1px;background:#C67955;"></span>
+                  <span style="width:4px;height:4px;border-radius:1px;background:#C67955;"></span>
+                  <span style="width:4px;height:4px;border-radius:1px;background:#C67955;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div style="padding:22px 22px 24px;">
           <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-bottom:8px;">ESPECIADO</div>
@@ -468,7 +558,7 @@
     <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.16em;color:rgba(245,241,232,.7);text-transform:uppercase;margin-bottom:16px;">¿NO SABES CUÁL ELEGIR?</p>
     <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:#F5F1E8;margin-bottom:18px;letter-spacing:-.02em;">Te ayudamos a encontrar tu fragancia ideal.</h2>
     <p style="font-size:1rem;color:rgba(245,241,232,.55);line-height:1.7;margin-bottom:32px;">Cuéntanos qué estilos te gustan y qué buscas — te recomendamos por WhatsApp sin compromiso.</p>
-    <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#D4A550;color:#1C1814;padding:16px 36px;border-radius:100px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:background .2s,transform .15s;box-shadow:0 8px 28px rgba(212,165,80,.28);" style-hover="background:#E8C077;transform:translateY(-2px);">
+    <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#1C1814;color:#F5F1E8;padding:16px 36px;border-radius:100px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:background .2s,transform .15s;box-shadow:0 8px 28px rgba(0,0,0,.3);" style-hover="background:#D4A550;color:#1C1814;transform:translateY(-2px);">
       Escríbenos por WhatsApp →
     </a>
   </div>
@@ -595,7 +685,7 @@ class Component extends DCLogic {
       progressStyle: {
         position: 'fixed', top: 0, left: 0, zIndex: 201,
         height: '3px',
-        background: 'linear-gradient(90deg,#D4A550 0%,#E8C077 100%)',
+        background: 'linear-gradient(90deg,#1C1814 0%,rgba(28,24,20,.35) 100%)',
         width: s.scrollPct + '%',
         pointerEvents: 'none',
         borderRadius: '0 3px 3px 0',
@@ -604,14 +694,14 @@ class Component extends DCLogic {
       },
       navStyle: {
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: s.navScrolled ? 'rgba(255,255,255,.98)' : 'rgba(255,255,255,.92)',
+        background: s.navScrolled ? 'rgba(13,11,8,.97)' : 'rgba(13,11,8,.85)',
         backdropFilter: 'blur(22px)',
         WebkitBackdropFilter: 'blur(22px)',
         borderBottom: s.navScrolled
           ? '1px solid rgba(212,165,80,.32)'
           : '1px solid rgba(212,165,80,.16)',
         boxShadow: s.navScrolled
-          ? '0 4px 32px rgba(28,24,20,.1), 0 1px 0 rgba(212,165,80,.2)'
+          ? '0 4px 32px rgba(0,0,0,.35), 0 1px 0 rgba(212,165,80,.2)'
           : '0 1px 0 rgba(212,165,80,.12)',
         transition: 'background .3s, box-shadow .3s, border-color .3s'
       },

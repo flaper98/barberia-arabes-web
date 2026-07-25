@@ -53,37 +53,37 @@
     }
     .nav-link::after {
       content: ''; position: absolute; bottom: 0; left: 12px;
-      width: 0; height: 2px; background: #2563EB;
+      width: 0; height: 2px; background: #F5F1E8;
       border-radius: 2px; transition: width .28s cubic-bezier(0.4,0,0.2,1);
     }
     .nav-link:hover { color: #fff; background: rgba(255,255,255,.08); }
     .nav-link:hover::after { width: calc(100% - 24px); }
-    .nav-link.active { color: #fff; background: rgba(37,99,235,.22); font-weight: 700; }
+    .nav-link.active { color: #fff; background: rgba(255,255,255,.14); font-weight: 700; }
     .nav-link.active::after { width: calc(100% - 24px); }
 
     .nav-cta {
       position: relative; overflow: hidden;
-      background: #2563EB; color: #fff; padding: 11px 26px;
+      background: #F5F1E8; color: #1C1814; padding: 11px 26px;
       border-radius: 100px; font-weight: 700; font-size: .875rem;
       text-decoration: none; display: inline-flex; align-items: center;
-      transition: background .2s, transform .15s, box-shadow .2s;
-      box-shadow: 0 4px 18px rgba(37,99,235,.3);
+      transition: background .2s, color .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 18px rgba(0,0,0,.2);
     }
-    .nav-cta:hover { background: #1A56D6; transform: translateY(-1px); box-shadow: 0 7px 24px rgba(37,99,235,.4); }
+    .nav-cta:hover { background: #1C1814; color: #F5F1E8; transform: translateY(-1px); box-shadow: 0 7px 24px rgba(0,0,0,.3); }
 
     @keyframes ringRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .logo-outer { position: relative; width: 50px; height: 50px; flex-shrink: 0; }
     .logo-outer::before {
       content: ''; position: absolute; inset: -3px; border-radius: 50%;
-      background: conic-gradient(#2563EB 0%, #60A5FA 30%, transparent 50%, #2563EB 100%);
+      background: conic-gradient(#F5F1E8 0%, rgba(245,241,232,.3) 30%, transparent 50%, #F5F1E8 100%);
       animation: ringRotate 3.5s linear infinite; opacity: .7;
     }
     .logo-outer::after { content: ''; position: absolute; inset: -1px; border-radius: 50%; background: rgba(255,255,255,.97); }
     .logo-ring-wrap {
       position: relative; z-index: 1; width: 46px; height: 46px; border-radius: 50%; overflow: hidden;
-      border: 2px solid rgba(37,99,235,.35); transition: box-shadow .35s;
+      border: 2px solid rgba(255,255,255,.35); transition: box-shadow .35s;
     }
-    .logo-outer:hover .logo-ring-wrap { box-shadow: 0 0 0 2px rgba(37,99,235,.3), 0 4px 16px rgba(37,99,235,.28); }
+    .logo-outer:hover .logo-ring-wrap { box-shadow: 0 0 0 2px rgba(255,255,255,.3), 0 4px 16px rgba(0,0,0,.28); }
 
     .hbg {
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
@@ -132,12 +132,12 @@
     <a href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;">
       <div class="logo-outer">
         <div class="logo-ring-wrap">
-          <img src="uploads/pasted-1782089821708-0.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
+          <img src="uploads/pasted-1782089821708-0.png" alt="Logo Árabe's Barber Studio" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
         </div>
       </div>
       <div>
         <div class="display" style="font-size:1.15rem;color:#F5F1E8;letter-spacing:0;line-height:1.1;">ÁRABE'S</div>
-        <div style="font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.16em;color:#2563EB;text-transform:uppercase;margin-top:2px;">Barber Studio</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.16em;color:rgba(245,241,232,.55);text-transform:uppercase;margin-top:2px;">Barber Studio</div>
       </div>
     </a>
 
@@ -175,7 +175,7 @@
 <!-- ═══ PAGE HEADER ═══ -->
 <section style="background:#0D0B08;padding:172px 32px 64px;">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:#2563EB;text-transform:uppercase;margin-bottom:16px;">Tienda</p>
+    <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:rgba(245,241,232,.7);text-transform:uppercase;margin-bottom:16px;">Tienda</p>
     <h1 class="display" style="font-size:clamp(2.6rem,6vw,4.75rem);color:#F5F1E8;line-height:.95;">Productos</h1>
   </div>
 </section>
@@ -185,7 +185,7 @@
   <div style="max-width:1200px;margin:0 auto;">
     <div style="margin-bottom:52px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;">
       <div>
-        <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.16em;color:#2563EB;text-transform:uppercase;margin-bottom:14px;">PARA EL CUIDADO EN CASA</p>
+        <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.16em;color:rgba(28,24,20,.45);text-transform:uppercase;margin-bottom:14px;">PARA EL CUIDADO EN CASA</p>
         <h2 class="display" style="font-size:clamp(2.2rem,4.5vw,3.5rem);color:#1C1814;text-wrap:balance;line-height:.95;">Lleva el look a<br/>casa contigo.</h2>
       </div>
       <p style="font-size:1rem;color:rgba(28,24,20,.55);max-width:340px;line-height:1.7;">Llévate los mejores productos de barbería profesional y mantén tu look perfecto.</p>
@@ -195,107 +195,181 @@
 
       <!-- Pomada -->
       <div class="prod-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
-        <div style="height:148px;background:linear-gradient(135deg,#1C1814 0%,#3A352A 100%);display:flex;align-items:center;justify-content:center;">
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(37,99,235,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="12" y="24" width="28" height="18" rx="3"/>
-            <path d="M12 31h28"/>
-            <path d="M15 24v-4.5A2.5 2.5 0 0117.5 17H34.5A2.5 2.5 0 0137 19.5V24"/>
-            <path d="M22 17v-4M30 17v-4"/>
-          </svg>
+        <div style="height:172px;background:#EFECE4;display:flex;align-items:center;justify-content:center;">
+          <div style="width:130px;">
+            <div style="height:30px;background:#D98A3D;border-radius:10px 10px 2px 2px;box-shadow:inset 0 -7px 10px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.12);"></div>
+            <div style="height:78px;background:#1C1814;padding:8px 12px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
+              <div style="font-family:'Space Mono',monospace;font-size:.4rem;letter-spacing:.14em;color:rgba(245,241,232,.28);white-space:nowrap;text-transform:uppercase;">Professional · Pomada · Professional ·</div>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.64rem;color:#F5F1E8;text-transform:uppercase;">Matte Paste</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;">
+                  <span class="display" style="font-size:1.3rem;color:#D98A3D;line-height:1;">P1</span>
+                  <div style="display:flex;gap:2px;">
+                    <span style="width:5px;height:5px;border-radius:1px;background:#D98A3D;"></span>
+                    <span style="width:5px;height:5px;border-radius:1px;background:#D98A3D;"></span>
+                    <span style="width:5px;height:5px;border-radius:1px;background:rgba(245,241,232,.2);"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="height:8px;background:#0D0B08;border-radius:2px 2px 8px 8px;"></div>
+          </div>
         </div>
         <div style="padding:22px 22px 24px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:8px;">FIJACIÓN FUERTE</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-bottom:8px;">FIJACIÓN FUERTE</div>
           <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#1C1814;margin-bottom:8px;">Pomada de Cera</h4>
           <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Fijación máxima con acabado natural. Ideal para estilos clásicos y modernos.</p>
-          <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#2563EB;color:#fff;padding:10px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px;" style-hover="background:#1A56D6;">Consultar precio →</a>
+          <a href="{{ waPomada }}" target="_blank" rel="noopener" style="background:#1C1814;color:#fff;padding:10px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px;" style-hover="background:#3A352A;">Consultar precio →</a>
         </div>
       </div>
 
       <!-- Aceite Barba -->
       <div class="prod-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
-        <div style="height:148px;background:linear-gradient(135deg,#2563EB 0%,#1A56D6 100%);display:flex;align-items:center;justify-content:center;">
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M26 10 C26 10 14 22 14 30 a12 12 0 0024 0 C38 22 26 10 26 10Z"/>
-            <path d="M20 34 a6 6 0 006 0"/>
-          </svg>
+        <div style="height:172px;background:#EFECE4;display:flex;align-items:center;justify-content:center;">
+          <div style="width:130px;">
+            <div style="height:30px;background:#7A4A2B;border-radius:10px 10px 2px 2px;box-shadow:inset 0 -7px 10px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.12);"></div>
+            <div style="height:78px;background:#1C1814;padding:8px 12px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
+              <div style="font-family:'Space Mono',monospace;font-size:.4rem;letter-spacing:.14em;color:rgba(245,241,232,.28);white-space:nowrap;text-transform:uppercase;">Professional · Aceite · Professional ·</div>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.64rem;color:#F5F1E8;text-transform:uppercase;">Beard Oil</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;">
+                  <span class="display" style="font-size:1.3rem;color:#B5793F;line-height:1;">A2</span>
+                  <div style="display:flex;gap:2px;">
+                    <span style="width:5px;height:5px;border-radius:1px;background:#B5793F;"></span>
+                    <span style="width:5px;height:5px;border-radius:1px;background:rgba(245,241,232,.2);"></span>
+                    <span style="width:5px;height:5px;border-radius:1px;background:rgba(245,241,232,.2);"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="height:8px;background:#0D0B08;border-radius:2px 2px 8px 8px;"></div>
+          </div>
         </div>
         <div style="padding:22px 22px 24px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:8px;">HIDRATACIÓN</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-bottom:8px;">HIDRATACIÓN</div>
           <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#1C1814;margin-bottom:8px;">Aceite para Barba</h4>
           <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Hidrata y suaviza la barba. Aroma fresco y absorción rápida.</p>
-          <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#2563EB;color:#fff;padding:10px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px;" style-hover="background:#1A56D6;">Consultar precio →</a>
+          <a href="{{ waAceiteBarba }}" target="_blank" rel="noopener" style="background:#1C1814;color:#fff;padding:10px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px;" style-hover="background:#3A352A;">Consultar precio →</a>
         </div>
       </div>
 
       <!-- Shampoo -->
       <div class="prod-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
-        <div style="height:148px;background:linear-gradient(135deg,#1C1814 0%,#3A352A 100%);display:flex;align-items:center;justify-content:center;">
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(37,99,235,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="16" y="16" width="20" height="26" rx="3.5"/>
-            <path d="M20 16v-5h12v5"/>
-            <path d="M36 24h4v7h-4"/>
-            <path d="M22 28h8"/>
-          </svg>
+        <div style="height:172px;background:#EFECE4;display:flex;align-items:center;justify-content:center;">
+          <div style="width:130px;">
+            <div style="height:30px;background:#2E8B84;border-radius:10px 10px 2px 2px;box-shadow:inset 0 -7px 10px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.12);"></div>
+            <div style="height:78px;background:#1C1814;padding:8px 12px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
+              <div style="font-family:'Space Mono',monospace;font-size:.4rem;letter-spacing:.14em;color:rgba(245,241,232,.28);white-space:nowrap;text-transform:uppercase;">Professional · Shampoo · Professional ·</div>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.64rem;color:#F5F1E8;text-transform:uppercase;">Deep Clean</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;">
+                  <span class="display" style="font-size:1.3rem;color:#4FB3AB;line-height:1;">S3</span>
+                  <div style="display:flex;gap:2px;">
+                    <span style="width:5px;height:5px;border-radius:1px;background:#4FB3AB;"></span>
+                    <span style="width:5px;height:5px;border-radius:1px;background:#4FB3AB;"></span>
+                    <span style="width:5px;height:5px;border-radius:1px;background:#4FB3AB;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="height:8px;background:#0D0B08;border-radius:2px 2px 8px 8px;"></div>
+          </div>
         </div>
         <div style="padding:22px 22px 24px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:8px;">LIMPIEZA</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-bottom:8px;">LIMPIEZA</div>
           <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#1C1814;margin-bottom:8px;">Shampoo Especial</h4>
           <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Limpieza profunda para cabello y barba. Sin sulfatos agresivos.</p>
-          <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#2563EB;color:#fff;padding:10px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px;" style-hover="background:#1A56D6;">Consultar precio →</a>
+          <a href="{{ waShampoo }}" target="_blank" rel="noopener" style="background:#1C1814;color:#fff;padding:10px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px;" style-hover="background:#3A352A;">Consultar precio →</a>
         </div>
       </div>
 
       <!-- Spray -->
       <div class="prod-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
-        <div style="height:148px;background:linear-gradient(135deg,#2563EB 0%,#1A56D6 100%);display:flex;align-items:center;justify-content:center;">
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="12" y="20" width="18" height="22" rx="3"/>
-            <path d="M30 26h6v-6h-8v6"/>
-            <path d="M36 20v-5"/>
-            <path d="M38 13l3-3M40 15h4M42 13l-3-3"/>
-          </svg>
+        <div style="height:172px;background:#EFECE4;display:flex;align-items:center;justify-content:center;">
+          <div style="width:130px;">
+            <div style="height:30px;background:#C79A56;border-radius:10px 10px 2px 2px;box-shadow:inset 0 -7px 10px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.12);"></div>
+            <div style="height:78px;background:#1C1814;padding:8px 12px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
+              <div style="font-family:'Space Mono',monospace;font-size:.4rem;letter-spacing:.14em;color:rgba(245,241,232,.28);white-space:nowrap;text-transform:uppercase;">Professional · Spray · Professional ·</div>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.64rem;color:#F5F1E8;text-transform:uppercase;">Sea Salt</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;">
+                  <span class="display" style="font-size:1.3rem;color:#C79A56;line-height:1;">T4</span>
+                  <div style="display:flex;gap:2px;">
+                    <span style="width:5px;height:5px;border-radius:1px;background:#C79A56;"></span>
+                    <span style="width:5px;height:5px;border-radius:1px;background:#C79A56;"></span>
+                    <span style="width:5px;height:5px;border-radius:1px;background:rgba(245,241,232,.2);"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="height:8px;background:#0D0B08;border-radius:2px 2px 8px 8px;"></div>
+          </div>
         </div>
         <div style="padding:22px 22px 24px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:8px;">TEXTURA</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-bottom:8px;">TEXTURA</div>
           <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#1C1814;margin-bottom:8px;">Spray de Sal Marina</h4>
           <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Textura y volumen natural. Perfecto para estilos desenfadados y casuales.</p>
-          <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#2563EB;color:#fff;padding:10px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px;" style-hover="background:#1A56D6;">Consultar precio →</a>
+          <a href="{{ waSpray }}" target="_blank" rel="noopener" style="background:#1C1814;color:#fff;padding:10px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px;" style-hover="background:#3A352A;">Consultar precio →</a>
         </div>
       </div>
 
       <!-- Cera mate -->
       <div class="prod-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
-        <div style="height:148px;background:linear-gradient(135deg,#1C1814 0%,#3A352A 100%);display:flex;align-items:center;justify-content:center;">
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(37,99,235,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <ellipse cx="26" cy="20" rx="14" ry="5"/>
-            <path d="M12 20v10" /><path d="M40 20v10"/>
-            <ellipse cx="26" cy="30" rx="14" ry="5"/>
-            <path d="M20 26h12"/>
-          </svg>
+        <div style="height:172px;background:#EFECE4;display:flex;align-items:center;justify-content:center;">
+          <div style="width:130px;">
+            <div style="height:30px;background:#5C7A4E;border-radius:10px 10px 2px 2px;box-shadow:inset 0 -7px 10px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.12);"></div>
+            <div style="height:78px;background:#1C1814;padding:8px 12px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
+              <div style="font-family:'Space Mono',monospace;font-size:.4rem;letter-spacing:.14em;color:rgba(245,241,232,.28);white-space:nowrap;text-transform:uppercase;">Professional · Matte · Professional ·</div>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.64rem;color:#F5F1E8;text-transform:uppercase;">Matte Wax</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;">
+                  <span class="display" style="font-size:1.3rem;color:#7A9A69;line-height:1;">M5</span>
+                  <div style="display:flex;gap:2px;">
+                    <span style="width:5px;height:5px;border-radius:1px;background:#7A9A69;"></span>
+                    <span style="width:5px;height:5px;border-radius:1px;background:rgba(245,241,232,.2);"></span>
+                    <span style="width:5px;height:5px;border-radius:1px;background:rgba(245,241,232,.2);"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="height:8px;background:#0D0B08;border-radius:2px 2px 8px 8px;"></div>
+          </div>
         </div>
         <div style="padding:22px 22px 24px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:8px;">ACABADO MATE</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-bottom:8px;">ACABADO MATE</div>
           <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#1C1814;margin-bottom:8px;">Cera Mate</h4>
-          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Control y definición sin brillo. Look natural de alto nivel todo el día.</p>
-          <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#2563EB;color:#fff;padding:10px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px;" style-hover="background:#1A56D6;">Consultar precio →</a>
+          <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Control y definición sin brillo. Estilo natural de alto nivel todo el día.</p>
+          <a href="{{ waCeraMate }}" target="_blank" rel="noopener" style="background:#1C1814;color:#fff;padding:10px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px;" style-hover="background:#3A352A;">Consultar precio →</a>
         </div>
       </div>
 
       <!-- Acondicionador -->
       <div class="prod-card" style="background:#FFFFFF;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(28,24,20,.05);">
-        <div style="height:148px;background:linear-gradient(135deg,#2563EB 0%,#1A56D6 100%);display:flex;align-items:center;justify-content:center;">
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 12h12v26l-2 4h-8l-2-4V12z"/>
-            <path d="M20 12v-3a2 2 0 012-2h8a2 2 0 012 2v3"/>
-            <path d="M22 24h8"/>
-            <path d="M23 30h6"/>
-          </svg>
+        <div style="height:172px;background:#EFECE4;display:flex;align-items:center;justify-content:center;">
+          <div style="width:130px;">
+            <div style="height:30px;background:#7C6296;border-radius:10px 10px 2px 2px;box-shadow:inset 0 -7px 10px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.12);"></div>
+            <div style="height:78px;background:#1C1814;padding:8px 12px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
+              <div style="font-family:'Space Mono',monospace;font-size:.4rem;letter-spacing:.14em;color:rgba(245,241,232,.28);white-space:nowrap;text-transform:uppercase;">Professional · Acond. · Professional ·</div>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.64rem;color:#F5F1E8;text-transform:uppercase;">Conditioner</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;">
+                  <span class="display" style="font-size:1.3rem;color:#9E85B4;line-height:1;">N6</span>
+                  <div style="display:flex;gap:2px;">
+                    <span style="width:5px;height:5px;border-radius:1px;background:#9E85B4;"></span>
+                    <span style="width:5px;height:5px;border-radius:1px;background:#9E85B4;"></span>
+                    <span style="width:5px;height:5px;border-radius:1px;background:rgba(245,241,232,.2);"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="height:8px;background:#0D0B08;border-radius:2px 2px 8px 8px;"></div>
+          </div>
         </div>
         <div style="padding:22px 22px 24px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:8px;">NUTRICIÓN</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,24,20,.45);margin-bottom:8px;">NUTRICIÓN</div>
           <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#1C1814;margin-bottom:8px;">Acondicionador Capilar</h4>
           <p style="font-size:.875rem;color:rgba(28,24,20,.55);line-height:1.6;margin-bottom:18px;">Nutrición y suavidad extrema. Para un cabello manejable y con brillo.</p>
-          <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#2563EB;color:#fff;padding:10px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px;" style-hover="background:#1A56D6;">Consultar precio →</a>
+          <a href="{{ waAcondicionador }}" target="_blank" rel="noopener" style="background:#1C1814;color:#fff;padding:10px 18px;border-radius:100px;font-size:.8125rem;font-weight:700;text-decoration:none;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px;" style-hover="background:#3A352A;">Consultar precio →</a>
         </div>
       </div>
 
@@ -306,22 +380,22 @@
 </section>
 
 <!-- ═══ FOOTER ═══ -->
-<footer style="background:#0D0B08;border-top:1px solid rgba(37,99,235,.08);padding:64px 32px 36px;">
+<footer style="background:#0D0B08;border-top:1px solid rgba(255,255,255,.08);padding:64px 32px 36px;">
   <div style="max-width:1200px;margin:0 auto;">
     <div class="grid-ft" style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:52px;align-items:start;">
       <div>
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
-          <div style="width:50px;height:50px;border-radius:50%;overflow:hidden;border:2px solid rgba(37,99,235,.35);">
-            <img src="uploads/pasted-1782089821708-0.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
+          <div style="width:50px;height:50px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.35);">
+            <img src="uploads/pasted-1782089821708-0.png" alt="Logo Árabe's Barber Studio" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
           </div>
           <div>
             <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.125rem;color:#F5F1E8;letter-spacing:-.01em;">ÁRABE'S</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;color:#2563EB;text-transform:uppercase;margin-top:2px;">Barber Studio</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;color:rgba(245,241,232,.4);text-transform:uppercase;margin-top:2px;">Barber Studio</div>
           </div>
         </div>
         <p style="font-size:.9375rem;color:rgba(245,241,232,.42);line-height:1.75;max-width:280px;margin-bottom:24px;">Tu estudio de barbería premium en Pucallpa. Cortes con precisión, estilo y dedicación.</p>
         <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;max-width:280px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F5F1E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0Z"/><circle cx="12" cy="10" r="3"/></svg>
           <div style="font-size:.875rem;color:rgba(245,241,232,.55);line-height:1.55;">Av. Pachacútec Mz. A Lt. 7, Pucallpa<br/><span style="color:rgba(245,241,232,.35);font-size:.8125rem;">Una cuadra antes del parque Lupuna</span></div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
@@ -340,7 +414,7 @@
       </div>
 
       <div>
-        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#2563EB;margin-bottom:20px;">Explorar</h4>
+        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,241,232,.4);margin-bottom:20px;">Explorar</h4>
         <div style="display:flex;flex-direction:column;gap:11px;">
           <a href="nosotros.html" style="color:rgba(245,241,232,.45);font-size:.9375rem;text-decoration:none;">Nosotros</a>
           <a href="servicios.html" style="color:rgba(245,241,232,.45);font-size:.9375rem;text-decoration:none;">Servicios</a>
@@ -349,7 +423,7 @@
       </div>
 
       <div>
-        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#2563EB;margin-bottom:20px;">Horarios</h4>
+        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,241,232,.4);margin-bottom:20px;">Horarios</h4>
         <div style="display:flex;flex-direction:column;gap:14px;">
           <div>
             <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,241,232,.3);margin-bottom:4px;">Lun — Sáb</div>
@@ -361,7 +435,7 @@
           </div>
           <div>
             <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,241,232,.3);margin-bottom:4px;">WhatsApp</div>
-            <a href="{{ waLink }}" target="_blank" rel="noopener" style="color:#2563EB;font-size:.9375rem;font-weight:600;text-decoration:none;" style-hover="color:#F5F1E8;">+51 957 950 654</a>
+            <a href="{{ waLink }}" target="_blank" rel="noopener" style="color:#F5F1E8;font-size:.9375rem;font-weight:700;text-decoration:none;" style-hover="color:rgba(245,241,232,.7);">+51 957 950 654</a>
           </div>
         </div>
       </div>
@@ -397,13 +471,16 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const waLink = 'https://wa.me/51957950654';
+    const waFor = (nombre) => waLink + '?text=' + encodeURIComponent(
+      `Hola! Quiero consultar el precio y disponibilidad de "${nombre}" en Árabe's Barber Studio. 💈`
+    );
     const open = s.menuOpen;
 
     return {
       progressStyle: {
         position: 'fixed', top: 0, left: 0, zIndex: 201,
         height: '3px',
-        background: 'linear-gradient(90deg,#2563EB 0%,#E8C96E 100%)',
+        background: 'linear-gradient(90deg,#1C1814 0%,rgba(28,24,20,.35) 100%)',
         width: s.scrollPct + '%',
         pointerEvents: 'none',
         borderRadius: '0 3px 3px 0',
@@ -425,7 +502,13 @@ class Component extends DCLogic {
       hbg1: open ? { transform: 'translateY(7px) rotate(45deg)' } : {},
       hbg2: open ? { opacity: 0, transform: 'scaleX(0)' } : {},
       hbg3: open ? { transform: 'translateY(-7px) rotate(-45deg)' } : {},
-      waLink
+      waLink,
+      waPomada: waFor('Pomada de Cera'),
+      waAceiteBarba: waFor('Aceite para Barba'),
+      waShampoo: waFor('Shampoo Especial'),
+      waSpray: waFor('Spray de Sal Marina'),
+      waCeraMate: waFor('Cera Mate'),
+      waAcondicionador: waFor('Acondicionador Capilar')
     };
   }
 }

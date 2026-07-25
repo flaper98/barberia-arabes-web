@@ -43,7 +43,7 @@
       color-scheme: light;
     }
     .barber-input::placeholder { color: rgba(28,24,20,.35); }
-    .barber-input:focus { border-color: #2563EB; background: rgba(37,99,235,.05); }
+    .barber-input:focus { border-color: #1C1814; background: rgba(28,24,20,.04); }
     textarea.barber-input { resize: vertical; min-height: 90px; }
     button:disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
 
@@ -69,37 +69,37 @@
     }
     .nav-link::after {
       content: ''; position: absolute; bottom: 0; left: 12px;
-      width: 0; height: 2px; background: #2563EB;
+      width: 0; height: 2px; background: #F5F1E8;
       border-radius: 2px; transition: width .28s cubic-bezier(0.4,0,0.2,1);
     }
     .nav-link:hover { color: #fff; background: rgba(255,255,255,.08); }
     .nav-link:hover::after { width: calc(100% - 24px); }
-    .nav-link.active { color: #fff; background: rgba(37,99,235,.22); font-weight: 700; }
+    .nav-link.active { color: #fff; background: rgba(255,255,255,.14); font-weight: 700; }
     .nav-link.active::after { width: calc(100% - 24px); }
 
     .nav-cta {
       position: relative; overflow: hidden;
-      background: #2563EB; color: #fff; padding: 11px 26px;
+      background: #F5F1E8; color: #1C1814; padding: 11px 26px;
       border-radius: 100px; font-weight: 700; font-size: .875rem;
       text-decoration: none; display: inline-flex; align-items: center;
-      transition: background .2s, transform .15s, box-shadow .2s;
-      box-shadow: 0 4px 18px rgba(37,99,235,.3);
+      transition: background .2s, color .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 18px rgba(0,0,0,.2);
     }
-    .nav-cta:hover { background: #1A56D6; transform: translateY(-1px); box-shadow: 0 7px 24px rgba(37,99,235,.4); }
+    .nav-cta:hover { background: #1C1814; color: #F5F1E8; transform: translateY(-1px); box-shadow: 0 7px 24px rgba(0,0,0,.3); }
 
     @keyframes ringRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .logo-outer { position: relative; width: 50px; height: 50px; flex-shrink: 0; }
     .logo-outer::before {
       content: ''; position: absolute; inset: -3px; border-radius: 50%;
-      background: conic-gradient(#2563EB 0%, #60A5FA 30%, transparent 50%, #2563EB 100%);
+      background: conic-gradient(#F5F1E8 0%, rgba(245,241,232,.3) 30%, transparent 50%, #F5F1E8 100%);
       animation: ringRotate 3.5s linear infinite; opacity: .7;
     }
     .logo-outer::after { content: ''; position: absolute; inset: -1px; border-radius: 50%; background: rgba(255,255,255,.97); }
     .logo-ring-wrap {
       position: relative; z-index: 1; width: 46px; height: 46px; border-radius: 50%; overflow: hidden;
-      border: 2px solid rgba(37,99,235,.35); transition: box-shadow .35s;
+      border: 2px solid rgba(255,255,255,.35); transition: box-shadow .35s;
     }
-    .logo-outer:hover .logo-ring-wrap { box-shadow: 0 0 0 2px rgba(37,99,235,.3), 0 4px 16px rgba(37,99,235,.28); }
+    .logo-outer:hover .logo-ring-wrap { box-shadow: 0 0 0 2px rgba(255,255,255,.3), 0 4px 16px rgba(0,0,0,.28); }
 
     .hbg {
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
@@ -148,12 +148,12 @@
     <a href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;">
       <div class="logo-outer">
         <div class="logo-ring-wrap">
-          <img src="uploads/pasted-1782089821708-0.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
+          <img src="uploads/pasted-1782089821708-0.png" alt="Logo Árabe's Barber Studio" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
         </div>
       </div>
       <div>
         <div class="display" style="font-size:1.15rem;color:#F5F1E8;letter-spacing:0;line-height:1.1;">ÁRABE'S</div>
-        <div style="font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.16em;color:#2563EB;text-transform:uppercase;margin-top:2px;">Barber Studio</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.16em;color:rgba(245,241,232,.55);text-transform:uppercase;margin-top:2px;">Barber Studio</div>
       </div>
     </a>
 
@@ -191,7 +191,7 @@
 <!-- ═══ PAGE HEADER ═══ -->
 <section style="background:#0D0B08;padding:172px 32px 64px;">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:#2563EB;text-transform:uppercase;margin-bottom:16px;">Agendar cita</p>
+    <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:rgba(245,241,232,.7);text-transform:uppercase;margin-bottom:16px;">Agendar cita</p>
     <h1 class="display" style="font-size:clamp(2.6rem,6vw,4.75rem);color:#F5F1E8;line-height:.95;">Reservar</h1>
   </div>
 </section>
@@ -203,7 +203,7 @@
       <p style="font-size:1rem;color:rgba(28,24,20,.55);line-height:1.7;">Completa el formulario y te contactamos para confirmar.<br/>O escríbenos directo por WhatsApp.</p>
     </div>
 
-    <div style="background:#FAFAF8;border:1.5px solid rgba(37,99,235,.15);border-radius:24px;padding:48px 40px;box-shadow:0 4px 32px rgba(28,24,20,.06);">
+    <div style="background:#FAFAF8;border:1.5px solid rgba(28,24,20,.12);border-radius:24px;padding:48px 40px;box-shadow:0 4px 32px rgba(28,24,20,.06);">
 
       <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
         <form onSubmit="{{ handleSubmit }}" style="display:flex;flex-direction:column;gap:22px;">
@@ -237,8 +237,8 @@
 
           <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px;">
             <button type="submit" disabled="{{ submitDisabled }}"
-              style="background:#2563EB;color:#fff;padding:16px 32px;border-radius:100px;font-weight:700;font-size:1rem;border:none;cursor:pointer;font-family:'Hanken Grotesk',sans-serif;transition:background .2s,transform .15s;box-shadow:0 6px 22px rgba(37,99,235,.3);width:100%;"
-              style-hover="background:#1A56D6;transform:translateY(-1px);">
+              style="background:#1C1814;color:#fff;padding:16px 32px;border-radius:100px;font-weight:700;font-size:1rem;border:none;cursor:pointer;font-family:'Hanken Grotesk',sans-serif;transition:background .2s,transform .15s;box-shadow:0 6px 22px rgba(0,0,0,.25);width:100%;"
+              style-hover="background:#3A352A;transform:translateY(-1px);">
               {{ submitText }}
             </button>
             <sc-if value="{{ showHint }}" hint-placeholder-val="{{ false }}">
@@ -265,8 +265,8 @@
 
       <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
         <div style="text-align:center;padding:24px 0;">
-          <div style="width:76px;height:76px;border-radius:50%;background:rgba(37,99,235,.1);border:2px solid rgba(37,99,235,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div style="width:76px;height:76px;border-radius:50%;background:rgba(28,24,20,.06);border:2px solid rgba(28,24,20,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1C1814" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
           </div>
           <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.875rem;font-weight:800;color:#1C1814;margin-bottom:12px;">¡Solicitud enviada!</h3>
           <p style="color:rgba(28,24,20,.6);font-size:1rem;line-height:1.7;margin-bottom:32px;max-width:360px;margin-left:auto;margin-right:auto;">Recibimos tu solicitud. Te contactaremos pronto para confirmar tu cita en Árabe's Barber Studio.</p>
@@ -282,22 +282,22 @@
 </section>
 
 <!-- ═══ FOOTER ═══ -->
-<footer style="background:#0D0B08;border-top:1px solid rgba(37,99,235,.08);padding:64px 32px 36px;">
+<footer style="background:#0D0B08;border-top:1px solid rgba(255,255,255,.08);padding:64px 32px 36px;">
   <div style="max-width:1200px;margin:0 auto;">
     <div class="grid-ft" style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:52px;align-items:start;">
       <div>
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
-          <div style="width:50px;height:50px;border-radius:50%;overflow:hidden;border:2px solid rgba(37,99,235,.35);">
-            <img src="uploads/pasted-1782089821708-0.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
+          <div style="width:50px;height:50px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.35);">
+            <img src="uploads/pasted-1782089821708-0.png" alt="Logo Árabe's Barber Studio" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
           </div>
           <div>
             <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.125rem;color:#F5F1E8;letter-spacing:-.01em;">ÁRABE'S</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;color:#2563EB;text-transform:uppercase;margin-top:2px;">Barber Studio</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;color:rgba(245,241,232,.4);text-transform:uppercase;margin-top:2px;">Barber Studio</div>
           </div>
         </div>
         <p style="font-size:.9375rem;color:rgba(245,241,232,.42);line-height:1.75;max-width:280px;margin-bottom:24px;">Tu estudio de barbería premium en Pucallpa. Cortes con precisión, estilo y dedicación.</p>
         <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;max-width:280px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F5F1E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0Z"/><circle cx="12" cy="10" r="3"/></svg>
           <div style="font-size:.875rem;color:rgba(245,241,232,.55);line-height:1.55;">Av. Pachacútec Mz. A Lt. 7, Pucallpa<br/><span style="color:rgba(245,241,232,.35);font-size:.8125rem;">Una cuadra antes del parque Lupuna</span></div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
@@ -316,7 +316,7 @@
       </div>
 
       <div>
-        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#2563EB;margin-bottom:20px;">Explorar</h4>
+        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,241,232,.4);margin-bottom:20px;">Explorar</h4>
         <div style="display:flex;flex-direction:column;gap:11px;">
           <a href="nosotros.html" style="color:rgba(245,241,232,.45);font-size:.9375rem;text-decoration:none;">Nosotros</a>
           <a href="servicios.html" style="color:rgba(245,241,232,.45);font-size:.9375rem;text-decoration:none;">Servicios</a>
@@ -325,7 +325,7 @@
       </div>
 
       <div>
-        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#2563EB;margin-bottom:20px;">Horarios</h4>
+        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,241,232,.4);margin-bottom:20px;">Horarios</h4>
         <div style="display:flex;flex-direction:column;gap:14px;">
           <div>
             <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,241,232,.3);margin-bottom:4px;">Lun — Sáb</div>
@@ -337,7 +337,7 @@
           </div>
           <div>
             <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,241,232,.3);margin-bottom:4px;">WhatsApp</div>
-            <a href="{{ waLink }}" target="_blank" rel="noopener" style="color:#2563EB;font-size:.9375rem;font-weight:600;text-decoration:none;" style-hover="color:#F5F1E8;">+51 957 950 654</a>
+            <a href="{{ waLink }}" target="_blank" rel="noopener" style="color:#F5F1E8;font-size:.9375rem;font-weight:700;text-decoration:none;" style-hover="color:rgba(245,241,232,.7);">+51 957 950 654</a>
           </div>
         </div>
       </div>
@@ -427,7 +427,7 @@ class Component extends DCLogic {
       progressStyle: {
         position: 'fixed', top: 0, left: 0, zIndex: 201,
         height: '3px',
-        background: 'linear-gradient(90deg,#2563EB 0%,#E8C96E 100%)',
+        background: 'linear-gradient(90deg,#1C1814 0%,rgba(28,24,20,.35) 100%)',
         width: s.scrollPct + '%',
         pointerEvents: 'none',
         borderRadius: '0 3px 3px 0',

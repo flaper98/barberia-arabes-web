@@ -27,47 +27,62 @@
     }
     .wa-pulse { animation: waPulse 2.8s infinite; }
 
-    .sc {
-      position: relative; overflow: hidden; border-radius: 20px;
-      border: 1.5px solid rgba(37,99,235,.11);
-      transition: transform .32s cubic-bezier(0.2,0.8,0.2,1), box-shadow .32s, border-color .25s;
+    @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-track { display: flex; width: max-content; animation: marqueeScroll 26s linear infinite; }
+    .marquee-line {
+      font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
+      font-size: clamp(1.4rem, 3.2vw, 2.25rem); color: #1C1814;
+      text-transform: uppercase; white-space: nowrap; letter-spacing: -.01em;
+      padding-right: 24px;
     }
-    .sc:hover { transform: translateY(-7px); box-shadow: 0 28px 64px rgba(28,24,20,.13); border-color: rgba(37,99,235,.3); }
-    .sc-overlay {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
-      background: rgba(13,11,8,.92); backdrop-filter: blur(4px);
-      opacity: 0; transform: translateY(14px);
-      transition: opacity .26s ease, transform .26s ease;
-      text-align: center; padding: 32px; pointer-events: none;
-    }
-    .sc:hover .sc-overlay { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
     .sc-pill {
       display: inline-flex; align-items: center; gap: 4px;
       font-family: 'Space Mono', monospace; font-size: .58rem;
       letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
       padding: 5px 12px; border-radius: 100px; white-space: nowrap;
     }
-    @keyframes svcIn {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
+
+    .svc-list { background: #FFFFFF; border-radius: 20px; border: 1.5px solid rgba(28,24,20,.1); overflow: hidden; }
+    .svc-row {
+      position: relative; display: flex; align-items: center; gap: 22px;
+      padding: 22px 26px; border-bottom: 1px solid rgba(28,24,20,.07);
+      text-decoration: none; color: inherit; transition: background .22s;
     }
-    .svc-grid .sc:nth-child(1) { animation: svcIn .55s .04s both; }
-    .svc-grid .sc:nth-child(2) { animation: svcIn .55s .13s both; }
-    .svc-grid .sc:nth-child(3) { animation: svcIn .55s .22s both; }
-    .svc-grid .sc:nth-child(4) { animation: svcIn .55s .31s both; }
-    .svc-grid .sc:nth-child(5) { animation: svcIn .55s .40s both; }
+    .svc-row:last-child { border-bottom: none; }
+    .svc-row:hover { background: rgba(28,24,20,.035); }
+    .svc-row-icon {
+      width: 54px; height: 54px; border-radius: 13px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(28,24,20,.045); transition: background .22s;
+    }
+    .svc-row:hover .svc-row-icon { background: rgba(28,24,20,.1); }
+    .svc-row-body { flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+    .svc-row-name { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.0625rem; color: #1C1814; letter-spacing: -.01em; white-space: nowrap; }
+    .svc-row-desc { font-size: .8125rem; color: rgba(28,24,20,.48); line-height: 1.5; max-width: 420px; text-decoration: none; }
+    .svc-row-cta {
+      flex-shrink: 0; display: flex; align-items: center; gap: 8px;
+      font-weight: 700; font-size: .8125rem; color: #1C1814; white-space: nowrap;
+    }
+    .svc-row-arrow { transition: transform .22s; flex-shrink: 0; }
+    .svc-row:hover .svc-row-arrow { transform: translateX(4px); }
+    .svc-row-feat { background: #1C1814; border-radius: 20px; margin-bottom: 14px; }
+    .svc-row-feat .svc-row-name, .svc-row-feat .svc-row-cta { color: #F5F1E8; }
+    .svc-row-feat .svc-row-desc { color: rgba(245,241,232,.5); }
+    .svc-row-feat .svc-row-icon { background: rgba(245,241,232,.14); }
+    .svc-row-feat:hover { background: #1C1814; }
+    .svc-row-feat:hover .svc-row-icon { background: rgba(245,241,232,.26); }
+    @media (max-width: 700px) {
+      .svc-row { flex-wrap: wrap; padding: 18px 20px; }
+      .svc-row-body { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .svc-row-desc { max-width: 100%; }
+      .svc-row-cta { margin-left: 76px; }
+    }
     @media (max-width: 880px) {
       .nav-links-d { display: none !important; }
-      .svc-grid { grid-template-columns: 1fr 1fr !important; }
-      .svc-feat { flex-direction: column !important; min-height: unset !important; }
-      .svc-feat-icon { width: 100% !important; height: 160px !important; }
-      .svc-wide { flex-direction: column !important; min-height: unset !important; }
-      .svc-wide-icon { width: 100% !important; height: 100px !important; border-right: none !important; border-bottom: 1px solid rgba(37,99,235,.1) !important; }
       .grid-ft { grid-template-columns: 1fr 1fr !important; }
     }
     @media (max-width: 600px) {
-      .svc-grid { grid-template-columns: 1fr !important; }
       .grid-ft { grid-template-columns: 1fr !important; }
     }
 
@@ -84,37 +99,37 @@
     }
     .nav-link::after {
       content: ''; position: absolute; bottom: 0; left: 12px;
-      width: 0; height: 2px; background: #2563EB;
+      width: 0; height: 2px; background: #F5F1E8;
       border-radius: 2px; transition: width .28s cubic-bezier(0.4,0,0.2,1);
     }
     .nav-link:hover { color: #fff; background: rgba(255,255,255,.08); }
     .nav-link:hover::after { width: calc(100% - 24px); }
-    .nav-link.active { color: #fff; background: rgba(37,99,235,.22); font-weight: 700; }
+    .nav-link.active { color: #fff; background: rgba(255,255,255,.14); font-weight: 700; }
     .nav-link.active::after { width: calc(100% - 24px); }
 
     .nav-cta {
       position: relative; overflow: hidden;
-      background: #2563EB; color: #fff; padding: 11px 26px;
+      background: #F5F1E8; color: #1C1814; padding: 11px 26px;
       border-radius: 100px; font-weight: 700; font-size: .875rem;
       text-decoration: none; display: inline-flex; align-items: center;
-      transition: background .2s, transform .15s, box-shadow .2s;
-      box-shadow: 0 4px 18px rgba(37,99,235,.3);
+      transition: background .2s, color .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 18px rgba(0,0,0,.2);
     }
-    .nav-cta:hover { background: #1A56D6; transform: translateY(-1px); box-shadow: 0 7px 24px rgba(37,99,235,.4); }
+    .nav-cta:hover { background: #1C1814; color: #F5F1E8; transform: translateY(-1px); box-shadow: 0 7px 24px rgba(0,0,0,.3); }
 
     @keyframes ringRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .logo-outer { position: relative; width: 50px; height: 50px; flex-shrink: 0; }
     .logo-outer::before {
       content: ''; position: absolute; inset: -3px; border-radius: 50%;
-      background: conic-gradient(#2563EB 0%, #60A5FA 30%, transparent 50%, #2563EB 100%);
+      background: conic-gradient(#F5F1E8 0%, rgba(245,241,232,.3) 30%, transparent 50%, #F5F1E8 100%);
       animation: ringRotate 3.5s linear infinite; opacity: .7;
     }
     .logo-outer::after { content: ''; position: absolute; inset: -1px; border-radius: 50%; background: rgba(255,255,255,.97); }
     .logo-ring-wrap {
       position: relative; z-index: 1; width: 46px; height: 46px; border-radius: 50%; overflow: hidden;
-      border: 2px solid rgba(37,99,235,.35); transition: box-shadow .35s;
+      border: 2px solid rgba(255,255,255,.35); transition: box-shadow .35s;
     }
-    .logo-outer:hover .logo-ring-wrap { box-shadow: 0 0 0 2px rgba(37,99,235,.3), 0 4px 16px rgba(37,99,235,.28); }
+    .logo-outer:hover .logo-ring-wrap { box-shadow: 0 0 0 2px rgba(255,255,255,.3), 0 4px 16px rgba(0,0,0,.28); }
 
     .hbg {
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
@@ -163,12 +178,12 @@
     <a href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;">
       <div class="logo-outer">
         <div class="logo-ring-wrap">
-          <img src="uploads/pasted-1782089821708-0.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
+          <img src="uploads/pasted-1782089821708-0.png" alt="Logo Árabe's Barber Studio" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
         </div>
       </div>
       <div>
         <div class="display" style="font-size:1.15rem;color:#F5F1E8;letter-spacing:0;line-height:1.1;">ÁRABE'S</div>
-        <div style="font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.16em;color:#2563EB;text-transform:uppercase;margin-top:2px;">Barber Studio</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.16em;color:rgba(245,241,232,.55);text-transform:uppercase;margin-top:2px;">Barber Studio</div>
       </div>
     </a>
 
@@ -204,33 +219,56 @@
 </nav>
 
 <!-- ═══ PAGE HEADER ═══ -->
-<section style="background:#0D0B08;padding:172px 32px 64px;">
-  <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:#2563EB;text-transform:uppercase;margin-bottom:16px;">Barber Studio · Pucallpa, Perú</p>
-    <h1 class="display" style="font-size:clamp(2.6rem,6vw,4.75rem);color:#F5F1E8;line-height:.95;">Servicios</h1>
+<section style="position:relative;padding:220px 32px 80px;background-image:linear-gradient(180deg,rgba(13,11,8,.55) 0%,rgba(13,11,8,.75) 60%,rgba(13,11,8,.92) 100%),url('uploads/pasted-1782089737424-0.png');background-size:cover;background-position:center 30%;overflow:hidden;">
+  <div style="max-width:1200px;margin:0 auto;position:relative;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;">
+      <span style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:rgba(245,241,232,.75);text-transform:uppercase;">Inicio</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(245,241,232,.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      <span style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:rgba(245,241,232,.75);text-transform:uppercase;">Servicios</span>
+    </div>
+    <h1 class="display" style="text-align:center;font-size:clamp(3.2rem,9vw,7rem);color:#F5F1E8;line-height:.9;">Servicios</h1>
+  </div>
+</section>
+
+<!-- ═══ SERVICES INTRO ═══ -->
+<section style="position:relative;padding:88px 32px 48px;background:#F5F1E8;overflow:hidden;">
+  <svg width="640" height="640" viewBox="0 0 90 90" fill="none" stroke="#1C1814" stroke-width="1" style="position:absolute;top:50%;right:-120px;transform:translateY(-50%);opacity:.05;pointer-events:none;">
+    <circle cx="22" cy="28" r="8"/><circle cx="22" cy="56" r="8"/>
+    <line x1="27.5" y1="32" x2="80" y2="45"/><line x1="27.5" y1="52" x2="80" y2="45"/>
+  </svg>
+  <div style="max-width:1200px;margin:0 auto;position:relative;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <span style="width:22px;height:2px;background:#1C1814;border-radius:2px;"></span>
+        <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:rgba(28,24,20,.45);text-transform:uppercase;margin:0;">Servicios destacados</p>
+      </div>
+      <h2 class="display" style="font-size:clamp(2.6rem,5.5vw,4.75rem);color:#1C1814;text-wrap:balance;line-height:.92;">Cabello, barba<br/>y bienestar,<br/>en un solo lugar.</h2>
+    </div>
+    <a href="reservar.html" style="display:inline-flex;align-items:stretch;text-decoration:none;border:1.5px solid rgba(28,24,20,.5);border-radius:4px;overflow:hidden;transition:border-color .2s,background .2s,box-shadow .2s;flex-shrink:0;box-shadow:0 2px 0 rgba(28,24,20,.06);" style-hover="border-color:#1C1814;background:rgba(28,24,20,.06);">
+      <span style="padding:16px 26px;color:#1C1814;font-weight:700;font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;">Reserva una cita</span>
+      <span style="width:48px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-left:1.5px solid rgba(28,24,20,.35);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1814" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ SERVICES MARQUEE ═══ -->
+<section style="background:#F5F1E8;border-top:1px solid rgba(28,24,20,.1);border-bottom:1px solid rgba(28,24,20,.1);overflow:hidden;padding:20px 0;">
+  <div class="marquee-track">
+    <span class="marquee-line">Corte · Barba · Black Mask · Diseño de Cejas · Facial Premium · Lavado Capilar · Lifting de Pestañas · Masaje Relajante · Ondulación · Alisado · Color ·&nbsp;</span>
+    <span class="marquee-line">Corte · Barba · Black Mask · Diseño de Cejas · Facial Premium · Lavado Capilar · Lifting de Pestañas · Masaje Relajante · Ondulación · Alisado · Color ·&nbsp;</span>
   </div>
 </section>
 
 <!-- ═══ SERVICES ═══ -->
-<section style="padding:64px 32px 96px;background:#F5F1E8;">
+<section style="padding:56px 32px 96px;background:#F5F1E8;">
   <div style="max-width:1200px;margin:0 auto;">
 
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:28px;">
-      <div>
-        <p style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.16em;color:#2563EB;text-transform:uppercase;margin-bottom:14px;">NUESTROS SERVICIOS</p>
-        <h2 class="display" style="font-size:clamp(2.2rem,4.5vw,3.75rem);color:#1C1814;text-wrap:balance;line-height:.95;">Cabello, barba<br/>y bienestar completo.</h2>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
-        <p style="font-size:.9375rem;color:rgba(28,24,20,.5);line-height:1.65;text-align:right;max-width:300px;">Barberos certificados y estación de estética integral. Explora por categoría y elige tu experiencia.</p>
-        <a href="reservar.html" style="background:#1C1814;color:#F5F1E8;padding:12px 26px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s;" style-hover="background:#2563EB;transform:translateY(-1px);">Reservar ahora →</a>
-      </div>
-    </div>
-
     <!-- FEATURED: Corte + Barba -->
-    <div class="sc svc-feat" style="background:#1C1814;display:flex;min-height:270px;margin-bottom:56px;">
-      <div class="svc-feat-icon" style="width:190px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-right:1px solid rgba(37,99,235,.1);">
-        <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(37,99,235,.28) 0%,transparent 68%);"></div>
-        <svg width="90" height="90" viewBox="0 0 90 90" fill="none" stroke="#2563EB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="position:relative;z-index:1;filter:drop-shadow(0 0 12px rgba(37,99,235,.35));">
+    <a href="{{ waCorteBarba }}" target="_blank" rel="noopener" class="svc-row svc-row-feat">
+      <div class="svc-row-icon">
+        <svg width="26" height="26" viewBox="0 0 90 90" fill="none" stroke="#F5F1E8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="22" cy="28" r="8"/><circle cx="22" cy="56" r="8"/>
           <line x1="27.5" y1="32" x2="68" y2="42"/><line x1="27.5" y1="52" x2="68" y2="42"/>
           <rect x="58" y="31" width="22" height="22" rx="3.5"/>
@@ -238,329 +276,205 @@
           <line x1="63" y1="35" x2="63" y2="28"/>
         </svg>
       </div>
-      <div style="flex:1;padding:30px 28px;display:flex;flex-direction:column;justify-content:space-between;">
-        <div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
-            <span class="sc-pill" style="background:#2563EB;color:#fff;">★ Más pedido</span>
-            <span class="sc-pill" style="background:rgba(37,99,235,.12);color:#2563EB;border:1px solid rgba(37,99,235,.22);">COMBO</span>
-            <span class="sc-pill" style="background:rgba(245,241,232,.06);color:rgba(245,241,232,.42);">⏱ 45 min</span>
-          </div>
-          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.875rem;font-weight:800;color:#F5F1E8;letter-spacing:-.025em;margin-bottom:10px;line-height:1.05;">Corte + Barba</h3>
-          <p style="font-size:.9375rem;color:rgba(245,241,232,.5);line-height:1.65;max-width:320px;">Combo premium: corte personalizado más diseño y perfilado de barba con navaja. Acabado perfecto.</p>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:20px;">
-          <div>
-            <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,232,.25);margin-bottom:3px;">Precio</div>
-            <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Consulta y agenda por WhatsApp</div>
-          </div>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:13px 28px;border-radius:100px;font-weight:700;font-size:.9375rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s;box-shadow:0 6px 22px rgba(37,99,235,.28);" style-hover="background:#93C5FD;transform:translateY(-1px);">Consultar →</a>
-        </div>
+      <div class="svc-row-body">
+        <span class="svc-row-name">Corte + Barba</span>
+        <span class="sc-pill" style="background:#F5F1E8;color:#1C1814;">★ Más pedido</span>
+        <span class="sc-pill" style="background:rgba(245,241,232,.14);color:#F5F1E8;">COMBO</span>
+        <p class="svc-row-desc">Combo premium: corte personalizado más diseño y perfilado de barba con navaja. Acabado perfecto.</p>
       </div>
-      <div class="sc-overlay">
-        <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.2rem;font-weight:700;color:#F5F1E8;">¡El favorito de todos!</p>
-        <p style="font-size:.875rem;color:rgba(245,241,232,.55);line-height:1.55;">Corte + diseño de barba completo con acabado premium.</p>
-        <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:12px 28px;border-radius:100px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:7px;">Consultar por WhatsApp →</a>
-      </div>
-    </div>
+      <span class="svc-row-cta">Consultar <svg class="svc-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </a>
 
     <!-- ── CATEGORÍA: CABELLO ── -->
-    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:22px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:baseline;gap:14px;margin:44px 0 20px;flex-wrap:wrap;">
       <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;color:#1C1814;letter-spacing:-.01em;">01 · Cabello</h3>
       <p style="font-size:.875rem;color:rgba(28,24,20,.48);line-height:1.6;max-width:520px;">Corte, forma y textura: todo lo que necesita tu cabello, de lo esencial a lo transformador.</p>
     </div>
-    <div class="svc-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:56px;">
+    <div class="svc-list">
 
-      <!-- Corte -->
-      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
-        <div style="height:138px;background:linear-gradient(145deg,#1C1814 0%,#2D2820 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
-          <div style="position:absolute;inset:0;background:radial-gradient(circle at 60% 40%,rgba(37,99,235,.2) 0%,transparent 65%);"></div>
-          <svg width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px rgba(37,99,235,.3));">
+      <a href="{{ waCorte }}" target="_blank" rel="noopener" class="svc-row">
+        <div class="svc-row-icon">
+          <svg width="24" height="24" viewBox="0 0 58 58" fill="none" stroke="#1C1814" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="16" cy="18" r="7"/><circle cx="16" cy="40" r="7"/>
             <line x1="21.5" y1="21.5" x2="48" y2="29"/><line x1="21.5" y1="36.5" x2="48" y2="29"/>
           </svg>
         </div>
-        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
-          <div>
-            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 30 min</span>
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Corte</h3>
-            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Tijera y máquina con acabado prolijo y natural, a tu medida.</p>
-          </div>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:#2563EB;text-decoration:none;font-weight:700;font-size:.85rem;">Consultar precio →</a>
+        <div class="svc-row-body">
+          <span class="svc-row-name">Corte</span>
+          <p class="svc-row-desc">Tijera y máquina con acabado prolijo y natural, a tu medida.</p>
         </div>
-        <div class="sc-overlay">
-          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Corte</p>
-          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Tijera y máquina profesional.<br/>30 minutos · Precio por WhatsApp</p>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Consultar →</a>
-        </div>
-      </div>
+        <span class="svc-row-cta">Consultar <svg class="svc-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
 
-      <!-- Lavado Capilar -->
-      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
-        <div style="height:138px;background:linear-gradient(145deg,#2563EB 0%,#1A56D6 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <a href="{{ waLavado }}" target="_blank" rel="noopener" class="svc-row">
+        <div class="svc-row-icon">
+          <svg width="24" height="24" viewBox="0 0 52 52" fill="none" stroke="#1C1814" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M26 8 C26 8 13 24 13 33 a13 13 0 0026 0 C39 24 26 8 26 8Z"/>
             <path d="M19 36 a7 7 0 007 0"/>
           </svg>
         </div>
-        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
-          <div>
-            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 15 min</span>
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Lavado Capilar</h3>
-            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Ritual de limpieza y masaje capilar con productos profesionales.</p>
-          </div>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:#2563EB;text-decoration:none;font-weight:700;font-size:.85rem;">Consultar precio →</a>
+        <div class="svc-row-body">
+          <span class="svc-row-name">Lavado Capilar</span>
+          <p class="svc-row-desc">Ritual de limpieza y masaje capilar con productos profesionales.</p>
         </div>
-        <div class="sc-overlay">
-          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Lavado Capilar</p>
-          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Limpieza profunda + masaje.<br/>15 minutos · Precio por WhatsApp</p>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Consultar →</a>
-        </div>
-      </div>
+        <span class="svc-row-cta">Consultar <svg class="svc-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
 
-      <!-- Alisado -->
-      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
-        <div style="height:138px;background:linear-gradient(145deg,#1C1814 0%,#2D2820 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
-          <div style="position:absolute;inset:0;background:radial-gradient(circle at 40% 50%,rgba(37,99,235,.22) 0%,transparent 65%);"></div>
-          <svg width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px rgba(37,99,235,.3));">
+      <a href="{{ waAlisado }}" target="_blank" rel="noopener" class="svc-row">
+        <div class="svc-row-icon">
+          <svg width="24" height="24" viewBox="0 0 58 58" fill="none" stroke="#1C1814" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <rect x="10" y="20" width="38" height="7" rx="3"/>
             <rect x="10" y="32" width="38" height="7" rx="3"/>
             <line x1="45" y1="14" x2="50" y2="9"/>
           </svg>
         </div>
-        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
-          <div>
-            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 90 min</span>
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Alisado</h3>
-            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Alisado profesional para un cabello liso, manejable y con brillo duradero.</p>
-          </div>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:#2563EB;text-decoration:none;font-weight:700;font-size:.85rem;">Consultar precio →</a>
+        <div class="svc-row-body">
+          <span class="svc-row-name">Alisado</span>
+          <p class="svc-row-desc">Alisado profesional para un cabello liso, manejable y con brillo duradero.</p>
         </div>
-        <div class="sc-overlay">
-          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Alisado</p>
-          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Precio final según largo y densidad.<br/>90 minutos · Consúltanos por WhatsApp</p>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Consultar →</a>
-        </div>
-      </div>
+        <span class="svc-row-cta">Consultar <svg class="svc-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
 
-      <!-- Ondulación / Semi-ondulación -->
-      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
-        <div style="height:138px;background:linear-gradient(145deg,#2563EB 0%,#1A56D6 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
-          <svg width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.6" stroke-linecap="round">
+      <a href="{{ waOndulacion }}" target="_blank" rel="noopener" class="svc-row">
+        <div class="svc-row-icon">
+          <svg width="24" height="24" viewBox="0 0 58 58" fill="none" stroke="#1C1814" stroke-width="1.8" stroke-linecap="round">
             <path d="M6 20c5-8 11-8 16 0s11 8 16 0 11-8 16 0"/>
             <path d="M6 38c5-8 11-8 16 0s11 8 16 0 11-8 16 0"/>
           </svg>
-          <span class="sc-pill" style="position:absolute;top:10px;right:10px;background:rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(4px);font-size:.52rem;">TENDENCIA</span>
         </div>
-        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
-          <div>
-            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 75 min</span>
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Ondulación / Semi-ondulación</h3>
-            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Textura y movimiento natural u ondas marcadas, según el look que busques.</p>
-          </div>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:#2563EB;text-decoration:none;font-weight:700;font-size:.85rem;">Consultar precio →</a>
+        <div class="svc-row-body">
+          <span class="svc-row-name">Ondulación / Semi-ondulación</span>
+          <span class="sc-pill" style="background:rgba(28,24,20,.08);color:rgba(28,24,20,.55);">TENDENCIA</span>
+          <p class="svc-row-desc">Textura y movimiento natural u ondas marcadas, según el look que busques.</p>
         </div>
-        <div class="sc-overlay">
-          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Ondulación / Semi-ondulación</p>
-          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">A medida, según intensidad deseada.<br/>75 minutos · Consúltanos por WhatsApp</p>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Consultar →</a>
-        </div>
-      </div>
+        <span class="svc-row-cta">Consultar <svg class="svc-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
 
-      <!-- Color -->
-      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
-        <div style="height:138px;background:linear-gradient(145deg,#1A56D6 0%,#2563EB 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
-          <svg width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <a href="{{ waColor }}" target="_blank" rel="noopener" class="svc-row">
+        <div class="svc-row-icon">
+          <svg width="24" height="24" viewBox="0 0 58 58" fill="none" stroke="#1C1814" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="29" cy="29" r="11"/>
             <circle cx="29" cy="13" r="5.5"/>
             <circle cx="42" cy="37" r="5.5"/>
             <circle cx="16" cy="37" r="5.5"/>
           </svg>
-          <span class="sc-pill" style="position:absolute;top:10px;right:10px;background:rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(4px);font-size:.52rem;">ESPECIAL</span>
         </div>
-        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
-          <div>
-            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 60 min</span>
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Color</h3>
-            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Coloración y decoloración profesional. El tono que siempre quisiste.</p>
-          </div>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:#2563EB;text-decoration:none;font-weight:700;font-size:.85rem;">Consultar precio →</a>
+        <div class="svc-row-body">
+          <span class="svc-row-name">Color</span>
+          <span class="sc-pill" style="background:rgba(28,24,20,.08);color:rgba(28,24,20,.55);">ESPECIAL</span>
+          <p class="svc-row-desc">Coloración y decoloración profesional. El tono que siempre quisiste.</p>
         </div>
-        <div class="sc-overlay">
-          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Color</p>
-          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Tintes y decoloración profesional.<br/>60 minutos · Consúltanos por WhatsApp</p>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Consultar →</a>
-        </div>
-      </div>
+        <span class="svc-row-cta">Consultar <svg class="svc-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
 
     </div>
 
     <!-- ── CATEGORÍA: BARBA & ROSTRO ── -->
-    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:22px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:baseline;gap:14px;margin:44px 0 20px;flex-wrap:wrap;">
       <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;color:#1C1814;letter-spacing:-.01em;">02 · Barba & Rostro</h3>
       <p style="font-size:.875rem;color:rgba(28,24,20,.48);line-height:1.6;max-width:520px;">Cuidado facial y de barba con navaja: definición, limpieza profunda y una mirada renovada.</p>
     </div>
-    <div class="svc-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:56px;">
+    <div class="svc-list">
 
-      <!-- Barba -->
-      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
-        <div style="height:138px;background:linear-gradient(145deg,#1C1814 0%,#2D2820 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
-          <div style="position:absolute;inset:0;background:radial-gradient(circle at 38% 62%,rgba(37,99,235,.22) 0%,transparent 65%);"></div>
-          <svg width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px rgba(37,99,235,.3));">
+      <a href="{{ waBarba }}" target="_blank" rel="noopener" class="svc-row">
+        <div class="svc-row-icon">
+          <svg width="24" height="24" viewBox="0 0 58 58" fill="none" stroke="#1C1814" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <rect x="22" y="10" width="12" height="30" rx="3.5"/>
             <line x1="22" y1="36" x2="12" y2="50"/><line x1="34" y1="36" x2="44" y2="50"/>
             <line x1="16" y1="44" x2="20" y2="40"/>
           </svg>
         </div>
-        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
-          <div>
-            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 25 min</span>
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Barba</h3>
-            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Perfilado con navaja. Definición total con acabado impecable.</p>
-          </div>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:#2563EB;text-decoration:none;font-weight:700;font-size:.85rem;">Consultar precio →</a>
+        <div class="svc-row-body">
+          <span class="svc-row-name">Barba</span>
+          <p class="svc-row-desc">Perfilado con navaja. Definición total con acabado impecable.</p>
         </div>
-        <div class="sc-overlay">
-          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Barba</p>
-          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Navaja + perfilado profesional.<br/>25 minutos · Precio por WhatsApp</p>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Consultar →</a>
-        </div>
-      </div>
+        <span class="svc-row-cta">Consultar <svg class="svc-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
 
-      <!-- Black Mask -->
-      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
-        <div style="height:138px;background:linear-gradient(145deg,#2563EB 0%,#1A56D6 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <a href="{{ waBlackMask }}" target="_blank" rel="noopener" class="svc-row">
+        <div class="svc-row-icon">
+          <svg width="24" height="24" viewBox="0 0 52 52" fill="none" stroke="#1C1814" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M26 8c-9 0-16 6-16 15v6c0 8 7 15 16 15s16-7 16-15v-6c0-9-7-15-16-15Z"/>
             <path d="M18 26h4M30 26h4"/>
           </svg>
-          <span class="sc-pill" style="position:absolute;top:10px;right:10px;background:rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(4px);font-size:.52rem;">DETOX</span>
         </div>
-        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
-          <div>
-            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 20 min</span>
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Black Mask</h3>
-            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Mascarilla facial detox: limpia poros, elimina puntos negros y frescura instantánea.</p>
-          </div>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:#2563EB;text-decoration:none;font-weight:700;font-size:.85rem;">Consultar precio →</a>
+        <div class="svc-row-body">
+          <span class="svc-row-name">Black Mask</span>
+          <span class="sc-pill" style="background:rgba(28,24,20,.08);color:rgba(28,24,20,.55);">DETOX</span>
+          <p class="svc-row-desc">Mascarilla facial detox: limpia poros, elimina puntos negros y frescura instantánea.</p>
         </div>
-        <div class="sc-overlay">
-          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Black Mask</p>
-          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Limpieza facial profunda.<br/>20 minutos · Precio por WhatsApp</p>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Consultar →</a>
-        </div>
-      </div>
+        <span class="svc-row-cta">Consultar <svg class="svc-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
 
-      <!-- Facial Premium -->
-      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
-        <div style="height:138px;background:linear-gradient(145deg,#1C1814 0%,#2D2820 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
-          <div style="position:absolute;inset:0;background:radial-gradient(circle at 55% 45%,rgba(37,99,235,.24) 0%,transparent 65%);"></div>
-          <svg width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px rgba(37,99,235,.3));">
+      <a href="{{ waFacial }}" target="_blank" rel="noopener" class="svc-row">
+        <div class="svc-row-icon">
+          <svg width="24" height="24" viewBox="0 0 58 58" fill="none" stroke="#1C1814" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="29" cy="29" r="16"/>
             <path d="M29 6v6M29 46v6M52 29h-6M12 29H6"/>
           </svg>
-          <span class="sc-pill" style="position:absolute;top:10px;right:10px;background:rgba(37,99,235,.2);color:#93C5FD;font-size:.52rem;">PREMIUM</span>
         </div>
-        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
-          <div>
-            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 40 min</span>
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Facial Premium</h3>
-            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Limpieza, exfoliación e hidratación profunda para un rostro renovado.</p>
-          </div>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:#2563EB;text-decoration:none;font-weight:700;font-size:.85rem;">Consultar precio →</a>
+        <div class="svc-row-body">
+          <span class="svc-row-name">Facial Premium</span>
+          <span class="sc-pill" style="background:rgba(28,24,20,.08);color:rgba(28,24,20,.55);">PREMIUM</span>
+          <p class="svc-row-desc">Limpieza, exfoliación e hidratación profunda para un rostro renovado.</p>
         </div>
-        <div class="sc-overlay">
-          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Facial Premium</p>
-          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Ritual completo de limpieza facial.<br/>40 minutos · Precio por WhatsApp</p>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Consultar →</a>
-        </div>
-      </div>
+        <span class="svc-row-cta">Consultar <svg class="svc-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
 
-      <!-- Diseño de Cejas -->
-      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
-        <div style="height:138px;background:linear-gradient(145deg,#2563EB 0%,#1A56D6 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
-          <svg width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.7" stroke-linecap="round">
+      <a href="{{ waCejas }}" target="_blank" rel="noopener" class="svc-row">
+        <div class="svc-row-icon">
+          <svg width="24" height="24" viewBox="0 0 58 58" fill="none" stroke="#1C1814" stroke-width="1.9" stroke-linecap="round">
             <path d="M8 26c6-10 16-10 20-2"/>
             <path d="M30 24c4-8 14-8 20 2"/>
           </svg>
         </div>
-        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
-          <div>
-            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 15 min</span>
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Diseño de Cejas</h3>
-            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Perfilado con hilo o navaja. Simetría y precisión para tu mirada.</p>
-          </div>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:#2563EB;text-decoration:none;font-weight:700;font-size:.85rem;">Consultar precio →</a>
+        <div class="svc-row-body">
+          <span class="svc-row-name">Diseño de Cejas</span>
+          <p class="svc-row-desc">Perfilado con hilo o navaja. Simetría y precisión para tu mirada.</p>
         </div>
-        <div class="sc-overlay">
-          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Diseño de Cejas</p>
-          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Perfilado profesional y simétrico.<br/>15 minutos · Precio por WhatsApp</p>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Consultar →</a>
-        </div>
-      </div>
+        <span class="svc-row-cta">Consultar <svg class="svc-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
 
-      <!-- Lifting de Pestañas -->
-      <div class="sc" style="background:#FFFFFF;display:flex;flex-direction:column;">
-        <div style="height:138px;background:linear-gradient(145deg,#1A56D6 0%,#2563EB 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;">
-          <svg width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.6" stroke-linecap="round">
+      <a href="{{ waPestanas }}" target="_blank" rel="noopener" class="svc-row">
+        <div class="svc-row-icon">
+          <svg width="24" height="24" viewBox="0 0 58 58" fill="none" stroke="#1C1814" stroke-width="1.8" stroke-linecap="round">
             <path d="M8 34c8 4 16 4 24 0"/>
             <path d="M14 34l-3 8M22 36l-1 8M30 36l2 8M38 34l4 7"/>
           </svg>
-          <span class="sc-pill" style="position:absolute;top:10px;right:10px;background:rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(4px);font-size:.52rem;">MIRADA WOW</span>
         </div>
-        <div style="padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
-          <div>
-            <span class="sc-pill" style="background:rgba(28,24,20,.06);color:rgba(28,24,20,.45);margin-bottom:12px;display:inline-flex;">⏱ 45 min</span>
-            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;font-weight:800;color:#1C1814;margin-bottom:8px;letter-spacing:-.015em;margin-top:8px;">Lifting de Pestañas</h3>
-            <p style="font-size:.875rem;color:rgba(28,24,20,.52);line-height:1.62;">Curvatura natural y efecto despierto sin necesidad de rímel.</p>
-          </div>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:#2563EB;text-decoration:none;font-weight:700;font-size:.85rem;">Consultar precio →</a>
+        <div class="svc-row-body">
+          <span class="svc-row-name">Lifting de Pestañas</span>
+          <span class="sc-pill" style="background:rgba(28,24,20,.08);color:rgba(28,24,20,.55);">MIRADA IMPACTANTE</span>
+          <p class="svc-row-desc">Curvatura natural y efecto despierto sin necesidad de rímel.</p>
         </div>
-        <div class="sc-overlay">
-          <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Lifting de Pestañas</p>
-          <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Efecto curvo, duración hasta 8 semanas.<br/>45 minutos · Precio por WhatsApp</p>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Consultar →</a>
-        </div>
-      </div>
+        <span class="svc-row-cta">Consultar <svg class="svc-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
 
     </div>
 
     <!-- ── CATEGORÍA: BIENESTAR ── -->
-    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:22px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:baseline;gap:14px;margin:44px 0 20px;flex-wrap:wrap;">
       <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;color:#1C1814;letter-spacing:-.01em;">03 · Bienestar</h3>
       <p style="font-size:.875rem;color:rgba(28,24,20,.48);line-height:1.6;max-width:520px;">Un momento para desconectar antes o después de tu servicio de barbería.</p>
     </div>
+    <div class="svc-list">
 
-    <!-- Masaje Relajante (wide) -->
-    <div class="sc svc-wide" style="background:#1C1814;display:flex;align-items:center;min-height:150px;">
-      <div class="svc-wide-icon" style="width:130px;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:28px;border-right:1px solid rgba(37,99,235,.1);">
-        <svg width="62" height="62" viewBox="0 0 62 62" fill="none" stroke="#2563EB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px rgba(37,99,235,.35));">
-          <path d="M31 9 C31 9 16 24 16 34 a15 15 0 0030 0 C46 24 31 9 31 9Z"/>
-          <path d="M23 41 a8 8 0 008 0"/>
-          <line x1="31" y1="9" x2="31" y2="4"/>
-        </svg>
-      </div>
-      <div style="flex:1;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
-        <div>
-          <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap;">
-            <span class="sc-pill" style="background:rgba(37,99,235,.12);color:#2563EB;border:1px solid rgba(37,99,235,.2);">BIENESTAR</span>
-            <span class="sc-pill" style="background:rgba(245,241,232,.06);color:rgba(245,241,232,.4);">⏱ 30 min</span>
-          </div>
-          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:#F5F1E8;letter-spacing:-.02em;margin-bottom:6px;">Masaje Relajante</h3>
-          <p style="font-size:.9375rem;color:rgba(245,241,232,.45);line-height:1.6;max-width:440px;">Masaje de cuello, hombros y espalda alta para liberar tensión. El complemento perfecto a tu corte.</p>
+      <a href="{{ waMasaje }}" target="_blank" rel="noopener" class="svc-row">
+        <div class="svc-row-icon">
+          <svg width="24" height="24" viewBox="0 0 62 62" fill="none" stroke="#1C1814" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M31 9 C31 9 16 24 16 34 a15 15 0 0030 0 C46 24 31 9 31 9Z"/>
+            <path d="M23 41 a8 8 0 008 0"/>
+            <line x1="31" y1="9" x2="31" y2="4"/>
+          </svg>
         </div>
-        <div style="display:flex;align-items:center;gap:22px;flex-shrink:0;">
-          <div style="text-align:right;">
-            <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,232,.24);margin-bottom:3px;">Precio</div>
-            <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.05rem;font-weight:700;color:#F5F1E8;">Por WhatsApp</div>
-          </div>
-          <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:13px 26px;border-radius:100px;font-weight:700;font-size:.9375rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;transition:background .2s,transform .15s;box-shadow:0 4px 20px rgba(37,99,235,.25);" style-hover="background:#93C5FD;transform:translateY(-1px);">Consultar →</a>
+        <div class="svc-row-body">
+          <span class="svc-row-name">Masaje Relajante</span>
+          <span class="sc-pill" style="background:rgba(28,24,20,.08);color:rgba(28,24,20,.55);">BIENESTAR</span>
+          <p class="svc-row-desc">Masaje de cuello, hombros y espalda alta para liberar tensión. El complemento perfecto a tu corte.</p>
         </div>
-      </div>
-      <div class="sc-overlay">
-        <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:#F5F1E8;">Masaje Relajante</p>
-        <p style="font-size:.875rem;color:rgba(245,241,232,.55);">Cuello, hombros y espalda alta.<br/>30 minutos · Precio por WhatsApp</p>
-        <a href="{{ waConsulta }}" target="_blank" rel="noopener" style="background:#2563EB;color:#0D0B08;padding:11px 24px;border-radius:100px;font-weight:700;font-size:.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Consultar →</a>
-      </div>
+        <span class="svc-row-cta">Consultar <svg class="svc-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
     </div>
 
     <p style="text-align:center;margin-top:36px;font-size:.65rem;letter-spacing:.08em;color:rgba(28,24,20,.4);font-family:'Space Mono',monospace;">CONSULTA PRECIOS Y DISPONIBILIDAD POR WHATSAPP · +51 957 950 654</p>
@@ -568,22 +482,22 @@
 </section>
 
 <!-- ═══ FOOTER ═══ -->
-<footer style="background:#0D0B08;border-top:1px solid rgba(37,99,235,.08);padding:64px 32px 36px;">
+<footer style="background:#0D0B08;border-top:1px solid rgba(255,255,255,.08);padding:64px 32px 36px;">
   <div style="max-width:1200px;margin:0 auto;">
     <div class="grid-ft" style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:52px;align-items:start;">
       <div>
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
-          <div style="width:50px;height:50px;border-radius:50%;overflow:hidden;border:2px solid rgba(37,99,235,.35);">
-            <img src="uploads/pasted-1782089821708-0.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
+          <div style="width:50px;height:50px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.35);">
+            <img src="uploads/pasted-1782089821708-0.png" alt="Logo Árabe's Barber Studio" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;" />
           </div>
           <div>
             <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.125rem;color:#F5F1E8;letter-spacing:-.01em;">ÁRABE'S</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;color:#2563EB;text-transform:uppercase;margin-top:2px;">Barber Studio</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;color:rgba(245,241,232,.4);text-transform:uppercase;margin-top:2px;">Barber Studio</div>
           </div>
         </div>
         <p style="font-size:.9375rem;color:rgba(245,241,232,.42);line-height:1.75;max-width:280px;margin-bottom:24px;">Tu estudio de barbería premium en Pucallpa. Cortes con precisión, estilo y dedicación.</p>
         <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;max-width:280px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F5F1E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0Z"/><circle cx="12" cy="10" r="3"/></svg>
           <div style="font-size:.875rem;color:rgba(245,241,232,.55);line-height:1.55;">Av. Pachacútec Mz. A Lt. 7, Pucallpa<br/><span style="color:rgba(245,241,232,.35);font-size:.8125rem;">Una cuadra antes del parque Lupuna</span></div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
@@ -602,7 +516,7 @@
       </div>
 
       <div>
-        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#2563EB;margin-bottom:20px;">Explorar</h4>
+        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,241,232,.4);margin-bottom:20px;">Explorar</h4>
         <div style="display:flex;flex-direction:column;gap:11px;">
           <a href="nosotros.html" style="color:rgba(245,241,232,.45);font-size:.9375rem;text-decoration:none;">Nosotros</a>
           <a href="productos.html" style="color:rgba(245,241,232,.45);font-size:.9375rem;text-decoration:none;">Productos</a>
@@ -611,7 +525,7 @@
       </div>
 
       <div>
-        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#2563EB;margin-bottom:20px;">Horarios</h4>
+        <h4 style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,241,232,.4);margin-bottom:20px;">Horarios</h4>
         <div style="display:flex;flex-direction:column;gap:14px;">
           <div>
             <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,241,232,.3);margin-bottom:4px;">Lun — Sáb</div>
@@ -623,7 +537,7 @@
           </div>
           <div>
             <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,241,232,.3);margin-bottom:4px;">WhatsApp</div>
-            <a href="{{ waLink }}" target="_blank" rel="noopener" style="color:#2563EB;font-size:.9375rem;font-weight:600;text-decoration:none;" style-hover="color:#F5F1E8;">+51 957 950 654</a>
+            <a href="{{ waLink }}" target="_blank" rel="noopener" style="color:#F5F1E8;font-size:.9375rem;font-weight:700;text-decoration:none;" style-hover="color:rgba(245,241,232,.7);">+51 957 950 654</a>
           </div>
         </div>
       </div>
@@ -659,16 +573,17 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const waLink = 'https://wa.me/51957950654';
-    const waConsulta = waLink + '?text=' + encodeURIComponent(
-      "Hola! Quiero consultar el precio y disponibilidad de un servicio en Árabe's Barber Studio. 💈"
+    const waFor = (nombre) => waLink + '?text=' + encodeURIComponent(
+      `Hola! Quiero consultar el precio y disponibilidad de "${nombre}" en Árabe's Barber Studio. 💈`
     );
+    const waConsulta = waFor('un servicio');
     const open = s.menuOpen;
 
     return {
       progressStyle: {
         position: 'fixed', top: 0, left: 0, zIndex: 201,
         height: '3px',
-        background: 'linear-gradient(90deg,#2563EB 0%,#E8C96E 100%)',
+        background: 'linear-gradient(90deg,#1C1814 0%,rgba(28,24,20,.35) 100%)',
         width: s.scrollPct + '%',
         pointerEvents: 'none',
         borderRadius: '0 3px 3px 0',
@@ -691,7 +606,19 @@ class Component extends DCLogic {
       hbg2: open ? { opacity: 0, transform: 'scaleX(0)' } : {},
       hbg3: open ? { transform: 'translateY(-7px) rotate(-45deg)' } : {},
       waLink,
-      waConsulta
+      waConsulta,
+      waCorteBarba: waFor('Corte + Barba'),
+      waCorte: waFor('Corte'),
+      waLavado: waFor('Lavado Capilar'),
+      waAlisado: waFor('Alisado'),
+      waOndulacion: waFor('Ondulación / Semi-ondulación'),
+      waColor: waFor('Color'),
+      waBarba: waFor('Barba'),
+      waBlackMask: waFor('Black Mask'),
+      waFacial: waFor('Facial Premium'),
+      waCejas: waFor('Diseño de Cejas'),
+      waPestanas: waFor('Lifting de Pestañas'),
+      waMasaje: waFor('Masaje Relajante')
     };
   }
 }
